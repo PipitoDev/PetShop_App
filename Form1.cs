@@ -66,5 +66,25 @@ namespace PetShop_App
         {
 
         }
+
+        private void label1_Click_4(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEmail_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEmail_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

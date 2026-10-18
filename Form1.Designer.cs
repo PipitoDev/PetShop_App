@@ -41,19 +41,17 @@
             tlpCaixaDireita = new TableLayoutPanel();
             lblBoasVindas = new Label();
             lblTxtSupDireito = new Label();
-            tblCaixaEmailSenha = new TableLayoutPanel();
-            lblEmail = new Label();
-            lblSenha = new Label();
-            txtSenha = new TextBox();
-            txtEmail = new TextBox();
             lblTxtSupInferior = new Label();
+            lblEmail = new Label();
+            txtEmail = new TextBox();
+            label1 = new Label();
+            textBox1 = new TextBox();
             plLadoEsquerdo.SuspendLayout();
             tlpCaixaEsquerda.SuspendLayout();
             flpCaixaLogoNome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).BeginInit();
             plLadoDireito.SuspendLayout();
             tlpCaixaDireita.SuspendLayout();
-            tblCaixaEmailSenha.SuspendLayout();
             SuspendLayout();
             // 
             // plLadoEsquerdo
@@ -202,19 +200,25 @@
             tlpCaixaDireita.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tlpCaixaDireita.Controls.Add(lblBoasVindas, 0, 2);
             tlpCaixaDireita.Controls.Add(lblTxtSupDireito, 0, 3);
-            tlpCaixaDireita.Controls.Add(tblCaixaEmailSenha, 0, 5);
             tlpCaixaDireita.Controls.Add(lblTxtSupInferior, 0, 4);
+            tlpCaixaDireita.Controls.Add(lblEmail, 0, 5);
+            tlpCaixaDireita.Controls.Add(txtEmail, 0, 6);
+            tlpCaixaDireita.Controls.Add(label1, 0, 7);
+            tlpCaixaDireita.Controls.Add(textBox1, 0, 8);
             tlpCaixaDireita.Location = new Point(56, 0);
             tlpCaixaDireita.Margin = new Padding(4, 3, 4, 3);
             tlpCaixaDireita.Name = "tlpCaixaDireita";
-            tlpCaixaDireita.RowCount = 7;
+            tlpCaixaDireita.RowCount = 10;
             tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 49F));
-            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 328F));
-            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tlpCaixaDireita.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tlpCaixaDireita.Size = new Size(360, 561);
             tlpCaixaDireita.TabIndex = 0;
             tlpCaixaDireita.Paint += tlpCaixaDireita_Paint;
@@ -247,68 +251,6 @@
             lblTxtSupDireito.Text = "Entre na sua conta";
             lblTxtSupDireito.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // tblCaixaEmailSenha
-            // 
-            tblCaixaEmailSenha.AutoSize = true;
-            tblCaixaEmailSenha.ColumnCount = 1;
-            tblCaixaEmailSenha.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tblCaixaEmailSenha.Controls.Add(lblEmail, 0, 0);
-            tblCaixaEmailSenha.Controls.Add(lblSenha, 0, 2);
-            tblCaixaEmailSenha.Controls.Add(txtSenha, 0, 3);
-            tblCaixaEmailSenha.Controls.Add(txtEmail, 0, 1);
-            tblCaixaEmailSenha.Location = new Point(3, 217);
-            tblCaixaEmailSenha.Name = "tblCaixaEmailSenha";
-            tblCaixaEmailSenha.RowCount = 4;
-            tblCaixaEmailSenha.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tblCaixaEmailSenha.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tblCaixaEmailSenha.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tblCaixaEmailSenha.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tblCaixaEmailSenha.Size = new Size(354, 130);
-            tblCaixaEmailSenha.TabIndex = 9;
-            // 
-            // lblEmail
-            // 
-            lblEmail.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblEmail.AutoSize = true;
-            lblEmail.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(3, 24);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(182, 16);
-            lblEmail.TabIndex = 4;
-            lblEmail.Text = " E-mail ou nome de usuário";
-            lblEmail.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblSenha
-            // 
-            lblSenha.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblSenha.AutoSize = true;
-            lblSenha.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSenha.Location = new Point(3, 89);
-            lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(52, 16);
-            lblSenha.TabIndex = 5;
-            lblSenha.Text = " Senha";
-            lblSenha.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // txtSenha
-            // 
-            txtSenha.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSenha.Location = new Point(3, 108);
-            txtSenha.Name = "txtSenha";
-            txtSenha.PlaceholderText = "Digite aqui";
-            txtSenha.Size = new Size(348, 22);
-            txtSenha.TabIndex = 3;
-            txtSenha.UseSystemPasswordChar = true;
-            // 
-            // txtEmail
-            // 
-            txtEmail.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(3, 43);
-            txtEmail.Name = "txtEmail";
-            txtEmail.PlaceholderText = "Digite aqui";
-            txtEmail.Size = new Size(348, 22);
-            txtEmail.TabIndex = 2;
-            // 
             // lblTxtSupInferior
             // 
             lblTxtSupInferior.AutoSize = true;
@@ -321,6 +263,47 @@
             lblTxtSupInferior.TabIndex = 7;
             lblTxtSupInferior.Text = " Acesse sua unidade e continue de onde parou.";
             lblTxtSupInferior.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Dock = DockStyle.Bottom;
+            lblEmail.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEmail.Location = new Point(3, 243);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(354, 16);
+            lblEmail.TabIndex = 9;
+            lblEmail.Text = " Insira seu E-mail";
+            // 
+            // txtEmail
+            // 
+            txtEmail.Dock = DockStyle.Fill;
+            txtEmail.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmail.Location = new Point(3, 262);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(354, 22);
+            txtEmail.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Bottom;
+            label1.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(3, 328);
+            label1.Name = "label1";
+            label1.Size = new Size(354, 16);
+            label1.TabIndex = 11;
+            label1.Text = " Insira sua senha";
+            // 
+            // textBox1
+            // 
+            textBox1.Dock = DockStyle.Fill;
+            textBox1.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(3, 347);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(354, 22);
+            textBox1.TabIndex = 12;
+            textBox1.UseSystemPasswordChar = true;
             // 
             // Form1
             // 
@@ -343,8 +326,6 @@
             plLadoDireito.ResumeLayout(false);
             tlpCaixaDireita.ResumeLayout(false);
             tlpCaixaDireita.PerformLayout();
-            tblCaixaEmailSenha.ResumeLayout(false);
-            tblCaixaEmailSenha.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -362,13 +343,11 @@
         private TableLayoutPanel tlpCaixaDireita;
         private TableLayoutPanel tableLayoutPanel1;
         private Label lblBoasVindas;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Label lblTxtSupInferior;
         private Label lblTxtSupDireito;
-        private TableLayoutPanel tblCaixaEmailSenha;
+        private Label lblTxtSupInferior;
         private Label lblEmail;
-        private Label lblSenha;
-        private TextBox txtSenha;
         private TextBox txtEmail;
+        private Label label1;
+        private TextBox textBox1;
     }
 }
