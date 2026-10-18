@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\Documentos\\Visual Studio - Projects\\PetShop_App\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{633DC7BF-E86C-4E23-89D4-6F899E1E2F52}|PetShop_App.csproj|d:\\documentos\\visual studio - projects\\petshop_app\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{633DC7BF-E86C-4E23-89D4-6F899E1E2F52}|PetShop_App.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{77705F58-CB4B-BBC5-2487-46B07892CE45}|PetShop_App.csproj|d:\\documentos\\visual studio - projects\\petshop_app\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{77705F58-CB4B-BBC5-2487-46B07892CE45}|PetShop_App.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,11 +14,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
