@@ -1,9 +1,9 @@
-# Arquivos de configuraÃ§Ã£o do Visual Studio
+# Arquivos de configuração do Visual Studio
 .vs/
 *.suo
 *.user
 
-# Pastas de compilaÃ§Ã£o (geradas automaticamente)
+# Pastas de compilação (geradas automaticamente)
 bin/
 obj/
 
