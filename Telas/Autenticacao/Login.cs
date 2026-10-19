@@ -1,3 +1,7 @@
+using System.Drawing.Drawing2D;
+
+
+
 namespace PetShop_App
 {
     public partial class Login : Form
@@ -5,7 +9,87 @@ namespace PetShop_App
         public Login()
         {
             InitializeComponent();
+
+            this.Shown += (s, e) =>
+                AjustarResponsividade();
+
+            pnlLaranja.Resize += (s, e) =>
+                AjustarResponsividade();
+
+            pnlCardLogin.Resize += (s, e) =>
+            {
+                ArredondarPainel(pnlCardLogin, 18);
+            };
+
+            ArredondarPainel(pnlCardLogin, 18);
+
+           
         }
+
+
+        private void ArredondarPainel(Panel painel, int raio)
+        {
+            if (painel.Width <= 0 || painel.Height <= 0)
+                return;
+
+            using GraphicsPath caminho = new GraphicsPath();
+
+            int diametro = raio * 2;
+            Rectangle area = new Rectangle(
+                0, 0, painel.Width, painel.Height
+            );
+
+            caminho.AddArc(area.Left, area.Top,
+                diametro, diametro, 180, 90);
+
+            caminho.AddArc(area.Right - diametro, area.Top,
+                diametro, diametro, 270, 90);
+
+            caminho.AddArc(area.Right - diametro,
+                area.Bottom - diametro,
+                diametro, diametro, 0, 90);
+
+            caminho.AddArc(area.Left,
+                area.Bottom - diametro,
+                diametro, diametro, 90, 90);
+
+            caminho.CloseFigure();
+
+            var regiaoAnterior = painel.Region;
+            painel.Region = new Region(caminho);
+            regiaoAnterior?.Dispose();
+        }
+
+
+
+        private void AjustarResponsividade()
+        {
+            int largura = pnlLaranja.ClientSize.Width;
+            int altura = pnlLaranja.ClientSize.Height;
+
+            if (largura <= 0 || altura <= 0)
+                return;
+
+            // Escala relativa à largura inicial de referência.
+            float escala = Math.Min(
+                largura / 400f,
+                altura / 600f
+            );
+
+            float tamanhoFrase = Math.Clamp(
+                12f * escala,
+                10f,
+                22f
+            );
+
+            lblFraseEfeito.Font = new Font(
+                "Segoe UI",
+                tamanhoFrase,
+                FontStyle.Bold
+            );
+        }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -83,6 +167,16 @@ namespace PetShop_App
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlUsuario_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblSenha_Click(object sender, EventArgs e)
         {
 
         }
