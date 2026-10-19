@@ -1,3 +1,5 @@
+using PetShop_App.Componentes;
+
 namespace PetShop_App
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace PetShop_App
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+            Application.Run(new DashboardDefault());
         }
     }
 }
