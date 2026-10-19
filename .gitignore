@@ -1,6 +1,12 @@
+# Arquivos de configuração do Visual Studio
 .vs/
+*.suo
+*.user
+
+# Pastas de compilação (geradas automaticamente)
 bin/
 obj/
-*.user
-*.suo
-appsettings.Development.json
+
+# Arquivos de Log e Cache
+*.log
+.nuget/
