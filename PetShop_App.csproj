@@ -27,13 +27,16 @@
     <Folder Include="Dados\" />
     <Folder Include="Modelos\" />
     <Folder Include="Paginas\" />
-    <Folder Include="Recursos\" />
     <Folder Include="Telas\Agendamentos\" />
     <Folder Include="Telas\Clientes\" />
     <Folder Include="Telas\Pets\" />
     <Folder Include="Telas\Principal\" />
     <Folder Include="Telas\Servicos\" />
     <Folder Include="Telas\Vendas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
   </ItemGroup>
 
 

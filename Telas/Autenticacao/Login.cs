@@ -10,6 +10,8 @@ namespace PetShop_App
         {
             InitializeComponent();
 
+            this.WindowState = FormWindowState.Maximized;
+
             this.Shown += (s, e) =>
                 AjustarResponsividade();
 
@@ -23,7 +25,6 @@ namespace PetShop_App
 
             ArredondarPainel(pnlCardLogin, 18);
 
-           
         }
 
 
