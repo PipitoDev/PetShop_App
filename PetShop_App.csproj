@@ -23,4 +23,33 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dados\" />
+    <Folder Include="Modelos\" />
+    <Folder Include="Paginas\" />
+    <Folder Include="Recursos\" />
+    <Folder Include="Telas\Agendamentos\" />
+    <Folder Include="Telas\Clientes\" />
+    <Folder Include="Telas\Pets\" />
+    <Folder Include="Telas\Principal\" />
+    <Folder Include="Telas\Servicos\" />
+    <Folder Include="Telas\Vendas\" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+		<Compile Update="Telas\Autenticacao\Login.cs">
+			<SubType>Form</SubType>
+		</Compile>
+
+		<Compile Update="Telas\Autenticacao\Login.Designer.cs">
+			<DependentUpon>Login.cs</DependentUpon>
+		</Compile>
+
+		<EmbeddedResource Update="Telas\Autenticacao\Login.resx">
+			<DependentUpon>Login.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+
+
 </Project>
