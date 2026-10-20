@@ -8,37 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PetShop_App
+namespace PetShop_App.Componentes
 {
-    public partial class Form2 : Form
+    public partial class MenuLateral : UserControl
     {
-        
-        public Form2()
+        public MenuLateral()
         {
             InitializeComponent();
         }
 
-        private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void iconPictureBox1_Click(object sender, EventArgs e)
         {
 
         }
