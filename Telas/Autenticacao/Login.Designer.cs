@@ -44,10 +44,10 @@
             lblTitulo = new Label();
             lblDesc = new Label();
             lblUsuario = new Label();
-            pnlUsuario = new PetShop_App.Componentes.PainelArredondado();
+            pnlUsuario = new Panel();
             txtUsuario = new TextBox();
             lblSenha = new Label();
-            pnlSenha = new PetShop_App.Componentes.PainelArredondado();
+            pnlSenha = new Panel();
             txtSenha = new TextBox();
             chkLembrarSenha = new CheckBox();
             btnEntrar = new Button();
@@ -161,7 +161,6 @@
             // 
             // tlpCentralizar
             // 
-            tlpCentralizar.BackgroundImage = (Image)resources.GetObject("tlpCentralizar.BackgroundImage");
             tlpCentralizar.ColumnCount = 3;
             tlpCentralizar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpCentralizar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 400F));
@@ -208,17 +207,16 @@
             tlpLogin.Margin = new Padding(0);
             tlpLogin.Name = "tlpLogin";
             tlpLogin.Padding = new Padding(10);
-            tlpLogin.RowCount = 11;
+            tlpLogin.RowCount = 10;
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 67F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 31F));
+            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 41F));
-            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
+            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 13F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Absolute, 8F));
             tlpLogin.Size = new Size(380, 400);
             tlpLogin.TabIndex = 1;
@@ -272,28 +270,23 @@
             // 
             // pnlUsuario
             // 
-            pnlUsuario.BackColor = Color.White;
             pnlUsuario.Controls.Add(txtUsuario);
-            pnlUsuario.CorBorda = Color.FromArgb(195, 205, 215);
             pnlUsuario.Dock = DockStyle.Fill;
-            pnlUsuario.EspessuraBorda = 1;
             pnlUsuario.Location = new Point(10, 185);
             pnlUsuario.Margin = new Padding(0, 3, 0, 5);
             pnlUsuario.Name = "pnlUsuario";
-            pnlUsuario.Padding = new Padding(12, 5, 12, 5);
-            pnlUsuario.Raio = 10;
-            pnlUsuario.Size = new Size(360, 34);
-            pnlUsuario.TabIndex = 5;
+            pnlUsuario.Padding = new Padding(12, 4, 12, 4);
+            pnlUsuario.Size = new Size(360, 37);
+            pnlUsuario.TabIndex = 1;
             // 
             // txtUsuario
             // 
             txtUsuario.BackColor = Color.White;
-            txtUsuario.BorderStyle = BorderStyle.None;
-            txtUsuario.Location = new Point(9, 9);
+            txtUsuario.BorderStyle = BorderStyle.FixedSingle;
+            txtUsuario.Location = new Point(12, 4);
             txtUsuario.Margin = new Padding(0);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "Digite o seu ID de usuário.";
-            txtUsuario.Size = new Size(336, 16);
+            txtUsuario.Size = new Size(336, 23);
             txtUsuario.TabIndex = 4;
             // 
             // lblSenha
@@ -301,7 +294,7 @@
             lblSenha.Anchor = AnchorStyles.Left;
             lblSenha.AutoSize = true;
             lblSenha.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblSenha.Location = new Point(13, 229);
+            lblSenha.Location = new Point(13, 231);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(55, 20);
             lblSenha.TabIndex = 5;
@@ -311,29 +304,24 @@
             // 
             // pnlSenha
             // 
-            pnlSenha.BackColor = Color.White;
             pnlSenha.Controls.Add(txtSenha);
-            pnlSenha.CorBorda = Color.FromArgb(195, 205, 215);
             pnlSenha.Dock = DockStyle.Fill;
-            pnlSenha.EspessuraBorda = 1;
             pnlSenha.Location = new Point(10, 258);
             pnlSenha.Margin = new Padding(0, 3, 0, 5);
             pnlSenha.Name = "pnlSenha";
-            pnlSenha.Padding = new Padding(12, 5, 12, 5);
-            pnlSenha.Raio = 10;
+            pnlSenha.Padding = new Padding(12, 4, 12, 4);
             pnlSenha.Size = new Size(360, 33);
             pnlSenha.TabIndex = 7;
+            pnlSenha.Paint += pnlUsuario_Paint;
             // 
             // txtSenha
             // 
-            txtSenha.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtSenha.BackColor = Color.White;
-            txtSenha.BorderStyle = BorderStyle.None;
-            txtSenha.Location = new Point(9, 9);
+            txtSenha.BorderStyle = BorderStyle.FixedSingle;
+            txtSenha.Location = new Point(12, 4);
             txtSenha.Margin = new Padding(0);
             txtSenha.Name = "txtSenha";
-            txtSenha.PlaceholderText = "Digite sua senha.";
-            txtSenha.Size = new Size(336, 16);
+            txtSenha.Size = new Size(336, 23);
             txtSenha.TabIndex = 6;
             txtSenha.UseSystemPasswordChar = true;
             // 
@@ -356,9 +344,9 @@
             btnEntrar.FlatStyle = FlatStyle.Flat;
             btnEntrar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(13, 336);
+            btnEntrar.Location = new Point(13, 351);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(354, 30);
+            btnEntrar.Size = new Size(354, 28);
             btnEntrar.TabIndex = 7;
             btnEntrar.Text = "Entrar";
             btnEntrar.UseVisualStyleBackColor = false;
@@ -410,9 +398,9 @@
         private Label lblBoasVindas;
         private Label lblSenha;
         private CheckBox chkLembrarSenha;
+        private Panel pnlSenha;
         private TextBox txtUsuario;
+        private Panel pnlUsuario;
         private TextBox txtSenha;
-        private Componentes.PainelArredondado pnlUsuario;
-        private Componentes.PainelArredondado pnlSenha;
     }
 }

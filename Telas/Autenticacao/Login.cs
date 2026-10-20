@@ -10,7 +10,8 @@ namespace PetShop_App
         {
             InitializeComponent();
 
-            this.WindowState = FormWindowState.Maximized;
+            // Conecta o botão ao evento de validação do formulário.
+            btnEntrar.Click += btnEntrar_Click;
 
             this.Shown += (s, e) =>
                 AjustarResponsividade();
@@ -25,6 +26,7 @@ namespace PetShop_App
 
             ArredondarPainel(pnlCardLogin, 18);
 
+           
         }
 
 
@@ -92,9 +94,57 @@ namespace PetShop_App
 
 
 
+        private void btnEntrar_Click(object sender, EventArgs e)
+        {
+            string usuario = txtUsuario.Text.Trim();
+            string senha = txtSenha.Text;
+
+            if (string.IsNullOrWhiteSpace(usuario) && string.IsNullOrWhiteSpace(senha))
+            {
+                using var aviso = new DialogoAviso(
+                    "Preencha os campos",
+                    "Informe seu usuário ou e-mail e sua senha para continuar.");
+                aviso.ShowDialog(this);
+                txtUsuario.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(usuario))
+            {
+                using var aviso = new DialogoAviso(
+                    "Nome não informado",
+                    "Digite seu usuário ou e-mail antes de continuar.");
+                aviso.ShowDialog(this);
+                txtUsuario.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(senha))
+            {
+                using var aviso = new DialogoAviso(
+                    "Senha não informada",
+                    "Digite sua senha antes de continuar.");
+                aviso.ShowDialog(this);
+                txtSenha.Focus();
+                return;
+            }
+
+            // A validação de credenciais precisa ser conectada ao banco/sistema de usuários.
+            using var avisoLogin = new DialogoAviso(
+                "Não foi possível entrar",
+                "Os campos foram preenchidos, mas a autenticação ainda não está conectada ao sistema.");
+            avisoLogin.ShowDialog(this);
+        }
+
+        private void LimparCampos()
+        {
+            txtUsuario.Clear();
+            txtSenha.Clear();
+            txtUsuario.Focus();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void lblTextoSuperiorEsquerdo_Click(object sender, EventArgs e)
