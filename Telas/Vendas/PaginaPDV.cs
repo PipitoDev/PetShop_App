@@ -2,7 +2,8 @@ using PetShop_App.Dados;
 using PetShop_App.Modelos;
 using PetShop_App.Componentes;
 
-namespace PetShop_App.Telas.Vendas;
+namespace PetShop_App.Telas.Vendas
+{
 
 public partial class PaginaPDV : UserControl
 {
@@ -14,7 +15,7 @@ public partial class PaginaPDV : UserControl
 
     public PaginaPDV()
     {
-        InitializeComponent();
+        InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
         Load += async (_, _) => await CarregarAsync();
         txtBusca.TextChanged += (_, _) => FiltrarProdutos();
         btnAdicionar.Click += (_, _) => Adicionar();
@@ -28,6 +29,7 @@ public partial class PaginaPDV : UserControl
 
     private async Task CarregarAsync()
     {
+        if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
         var repo = new RepositorioPetShop();
         produtos = await repo.ListarProdutosAsync();
         var clientes = await repo.ListarClientesAsync();
@@ -134,4 +136,6 @@ public partial class PaginaPDV : UserControl
         LimparVenda();
         await CarregarAsync();
     }
+}
+
 }

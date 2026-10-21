@@ -10,7 +10,7 @@ namespace PetShop_App
     {
         public Login()
         {
-            InitializeComponent();
+            InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
 
             // Conecta o botão ao evento de validação do formulário.
             btnEntrar.Click += btnEntrar_Click;
@@ -28,7 +28,7 @@ namespace PetShop_App
 
             ArredondarPainel(pnlCardLogin, 18);
 
-           
+
         }
 
 
@@ -96,7 +96,7 @@ namespace PetShop_App
 
 
 
-        private async void btnEntrar_Click(object sender, EventArgs e)
+        private async void btnEntrar_Click(object? sender, EventArgs e)
         {
             string usuario = txtUsuario.Text.Trim();
             string senha = txtSenha.Text;

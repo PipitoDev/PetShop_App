@@ -5,7 +5,8 @@ using PetShop_App.Telas.Servicos;
 using PetShop_App.Telas.Vendas;
 using PetShop_App.Dados;
 
-namespace PetShop_App.Telas.Principal;
+namespace PetShop_App.Telas.Principal
+{
 
 public partial class Principal : Form
 {
@@ -13,7 +14,7 @@ public partial class Principal : Form
 
     public Principal(string nomeFuncionario, string cargo)
     {
-        InitializeComponent();
+        InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
         menuLateral.ConfigurarUsuario(nomeFuncionario, cargo);
         lblSaudacao.Text = $"Bom dia, {nomeFuncionario}";
         lblData.Text = DateTime.Today.ToString("dddd, dd/MM/yyyy");
@@ -51,4 +52,6 @@ public partial class Principal : Form
         pagina.Dock = DockStyle.Fill;
         pnlConteudo.Controls.Add(pagina);
     }
+}
+
 }

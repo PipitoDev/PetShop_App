@@ -94,4 +94,13 @@
     <Compile Update="Telas\Vendas\PaginaEstoque.Designer.cs"><DependentUpon>PaginaEstoque.cs</DependentUpon></Compile>
     <EmbeddedResource Update="Telas\Vendas\PaginaEstoque.resx"><DependentUpon>PaginaEstoque.cs</DependentUpon></EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Componentes\FormularioCadastro.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Componentes\FormularioCadastro.Designer.cs"><DependentUpon>FormularioCadastro.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Componentes\FormularioCadastro.resx"><DependentUpon>FormularioCadastro.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Componentes\Notificacoes\DialogoAviso.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Componentes\Notificacoes\DialogoAviso.Designer.cs"><DependentUpon>DialogoAviso.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Componentes\Notificacoes\DialogoAviso.resx"><DependentUpon>DialogoAviso.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Componentes\PainelArredondado.cs"><SubType>Component</SubType></Compile>
+  </ItemGroup>
 </Project>

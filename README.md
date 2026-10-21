@@ -14,3 +14,7 @@ Primeiro acesso: usuário `admin`, senha `admin`. Altere a senha no banco antes 
 dotnet restore
 dotnet run
 ```
+
+## Guia do sistema
+
+Consulte [Funcionamento e análise](docs/FUNCIONAMENTO.md) para navegação, eventos dos botões, relações do banco, pendências e roteiro de validação.
