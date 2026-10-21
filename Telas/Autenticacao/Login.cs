@@ -1,4 +1,6 @@
 using System.Drawing.Drawing2D;
+using PetShop_App.Dados;
+using PetShop_App.Telas.Principal;
 
 
 
@@ -94,7 +96,7 @@ namespace PetShop_App
 
 
 
-        private void btnEntrar_Click(object sender, EventArgs e)
+        private async void btnEntrar_Click(object sender, EventArgs e)
         {
             string usuario = txtUsuario.Text.Trim();
             string senha = txtSenha.Text;
@@ -129,11 +131,34 @@ namespace PetShop_App
                 return;
             }
 
-            // A validação de credenciais precisa ser conectada ao banco/sistema de usuários.
-            using var avisoLogin = new DialogoAviso(
-                "Não foi possível entrar",
-                "Os campos foram preenchidos, mas a autenticação ainda não está conectada ao sistema.");
-            avisoLogin.ShowDialog(this);
+            btnEntrar.Enabled = false;
+            btnEntrar.Text = "Entrando...";
+            try
+            {
+                await InicializadorBanco.InicializarAsync();
+                var (valido, nome, perfil) = await new RepositorioPetShop().AutenticarAsync(usuario, senha);
+                if (!valido)
+                {
+                    using var avisoLogin = new DialogoAviso("Credenciais inválidas", "Confira o usuário e a senha informados.");
+                    avisoLogin.ShowDialog(this);
+                    return;
+                }
+
+                Hide();
+                using var principal = new Principal(nome, perfil);
+                principal.ShowDialog();
+                Close();
+            }
+            catch (Exception erro)
+            {
+                using var avisoBanco = new DialogoAviso("Não foi possível conectar ao MySQL", "Confira as variáveis PETSHOP_DB_SERVIDOR, PETSHOP_DB_PORTA, PETSHOP_DB_NOME, PETSHOP_DB_USUARIO e PETSHOP_DB_SENHA.\n\n" + erro.Message);
+                avisoBanco.ShowDialog(this);
+            }
+            finally
+            {
+                btnEntrar.Enabled = true;
+                btnEntrar.Text = "ENTRAR";
+            }
         }
 
         private void LimparCampos()

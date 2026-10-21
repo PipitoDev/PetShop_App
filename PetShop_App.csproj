@@ -30,8 +30,6 @@
     <Folder Include="Recursos\" />
     <Folder Include="Telas\Agendamentos\" />
     <Folder Include="Telas\Clientes\" />
-    <Folder Include="Telas\Pets\" />
-    <Folder Include="Telas\Principal\" />
     <Folder Include="Telas\Servicos\" />
     <Folder Include="Telas\Vendas\" />
   </ItemGroup>
@@ -50,7 +48,50 @@
 
 	<ItemGroup>
 	  <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+	  <PackageReference Include="MySqlConnector" Version="2.4.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Update="Componentes\MenuLateral.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
 
+		<Compile Update="Componentes\MenuLateral.Designer.cs">
+			<DependentUpon>MenuLateral.cs</DependentUpon>
+		</Compile>
+
+		<EmbeddedResource Update="Componentes\MenuLateral.resx">
+			<DependentUpon>MenuLateral.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Telas\Principal\Principal.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Principal\Principal.Designer.cs"><DependentUpon>Principal.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Principal\Principal.resx"><DependentUpon>Principal.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Principal\PainelDiario.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Principal\PainelDiario.Designer.cs"><DependentUpon>PainelDiario.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Principal\PainelDiario.resx"><DependentUpon>PainelDiario.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Clientes\PaginaClientes.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Clientes\PaginaClientes.Designer.cs"><DependentUpon>PaginaClientes.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Clientes\PaginaClientes.resx"><DependentUpon>PaginaClientes.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Pets\PaginaPets.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Pets\PaginaPets.Designer.cs"><DependentUpon>PaginaPets.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Pets\PaginaPets.resx"><DependentUpon>PaginaPets.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Servicos\PaginaServicos.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Servicos\PaginaServicos.Designer.cs"><DependentUpon>PaginaServicos.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Servicos\PaginaServicos.resx"><DependentUpon>PaginaServicos.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Agendamentos\PaginaAtendimentos.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Agendamentos\PaginaAtendimentos.Designer.cs"><DependentUpon>PaginaAtendimentos.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Agendamentos\PaginaAtendimentos.resx"><DependentUpon>PaginaAtendimentos.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Vendas\PaginaPDV.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Vendas\PaginaPDV.Designer.cs"><DependentUpon>PaginaPDV.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Vendas\PaginaPDV.resx"><DependentUpon>PaginaPDV.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Vendas\PaginaPedidos.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Vendas\PaginaPedidos.Designer.cs"><DependentUpon>PaginaPedidos.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Vendas\PaginaPedidos.resx"><DependentUpon>PaginaPedidos.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Telas\Vendas\PaginaEstoque.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Telas\Vendas\PaginaEstoque.Designer.cs"><DependentUpon>PaginaEstoque.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Telas\Vendas\PaginaEstoque.resx"><DependentUpon>PaginaEstoque.cs</DependentUpon></EmbeddedResource>
+  </ItemGroup>
 </Project>
