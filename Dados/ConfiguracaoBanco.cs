@@ -7,5 +7,5 @@ public static class ConfiguracaoBanco
     public static uint Porta => uint.TryParse(Environment.GetEnvironmentVariable("PETSHOP_DB_PORTA"), out var porta) ? porta : 3306;
     public static string Banco => Environment.GetEnvironmentVariable("PETSHOP_DB_NOME") ?? "petshop_central";
     public static string Usuario => Environment.GetEnvironmentVariable("PETSHOP_DB_USUARIO") ?? "root";
-    public static string Senha => Environment.GetEnvironmentVariable("PETSHOP_DB_SENHA") ?? "root";
+    public static string Senha => Environment.GetEnvironmentVariable("PETSHOP_DB_SENHA") ?? "";
 }

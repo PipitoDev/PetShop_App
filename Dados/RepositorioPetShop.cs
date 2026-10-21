@@ -90,7 +90,7 @@ public sealed class RepositorioPetShop
         comando.Parameters.AddWithValue("@nascimento", pet.Nascimento); comando.Parameters.AddWithValue("@peso", pet.Peso);
         await comando.ExecuteNonQueryAsync();
     }
-    public async Task AtualizarPetAsync(Pet p) { await ExecutarAsync("UPDATE pets SET cliente_id=@cliente,nome=@nome,especie=@especie,raca=@raca,porte=@porte,peso=@peso WHERE id=@id", ("@cliente", p.ClienteId), ("@nome", p.Nome), ("@especie", p.Especie), ("@raca", p.Raca), ("@porte", p.Porte), ("@peso", p.Peso), ("@id", p.Id)); }
+    public async Task AtualizarPetAsync(Pet p) { await ExecutarAsync("UPDATE pets SET cliente_id=@cliente,nome=@nome,especie=@especie,raca=@raca,porte=@porte,nascimento=@nascimento,peso=@peso WHERE id=@id", ("@cliente", p.ClienteId), ("@nome", p.Nome), ("@especie", p.Especie), ("@raca", p.Raca), ("@porte", p.Porte), ("@nascimento", p.Nascimento), ("@peso", p.Peso), ("@id", p.Id)); }
     public async Task ExcluirPetAsync(int id) => await ExecutarAsync("DELETE FROM pets WHERE id=@id", ("@id", id));
 
     public async Task<List<Servico>> ListarServicosAsync()

@@ -29,7 +29,6 @@
     <Folder Include="Paginas\" />
     <Folder Include="Recursos\" />
     <Folder Include="Telas\Agendamentos\" />
-    <Folder Include="Telas\Clientes\" />
     <Folder Include="Telas\Servicos\" />
     <Folder Include="Telas\Vendas\" />
   </ItemGroup>
@@ -98,9 +97,21 @@
     <Compile Update="Componentes\FormularioCadastro.cs"><SubType>Form</SubType></Compile>
     <Compile Update="Componentes\FormularioCadastro.Designer.cs"><DependentUpon>FormularioCadastro.cs</DependentUpon></Compile>
     <EmbeddedResource Update="Componentes\FormularioCadastro.resx"><DependentUpon>FormularioCadastro.cs</DependentUpon></EmbeddedResource>
-    <Compile Update="Componentes\Notificacoes\DialogoAviso.cs"><SubType>Form</SubType></Compile>
-    <Compile Update="Componentes\Notificacoes\DialogoAviso.Designer.cs"><DependentUpon>DialogoAviso.cs</DependentUpon></Compile>
-    <EmbeddedResource Update="Componentes\Notificacoes\DialogoAviso.resx"><DependentUpon>DialogoAviso.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Componentes\Notificacoes\AvisoPreencha.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Componentes\Notificacoes\AvisoPreencha.Designer.cs"><DependentUpon>AvisoPreencha.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Componentes\Notificacoes\AvisoPreencha.resx"><DependentUpon>AvisoPreencha.cs</DependentUpon></EmbeddedResource>
     <Compile Update="Componentes\PainelArredondado.cs"><SubType>Component</SubType></Compile>
+    <Compile Update="Telas\Clientes\FormularioCliente.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Clientes\FormularioCliente.Designer.cs"><DependentUpon>FormularioCliente.cs</DependentUpon></Compile>
+    <Compile Update="Telas\Pets\FormularioPet.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Pets\FormularioPet.Designer.cs"><DependentUpon>FormularioPet.cs</DependentUpon></Compile>
+    <Compile Update="Telas\Servicos\FormularioServico.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Servicos\FormularioServico.Designer.cs"><DependentUpon>FormularioServico.cs</DependentUpon></Compile>
+    <Compile Update="Telas\Agendamentos\FormularioAtendimento.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Agendamentos\FormularioAtendimento.Designer.cs"><DependentUpon>FormularioAtendimento.cs</DependentUpon></Compile>
+    <Compile Update="Telas\Vendas\FormularioProduto.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Vendas\FormularioProduto.Designer.cs"><DependentUpon>FormularioProduto.cs</DependentUpon></Compile>
+    <Compile Update="Telas\Vendas\FormularioCaixa.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Telas\Vendas\FormularioCaixa.Designer.cs"><DependentUpon>FormularioCaixa.cs</DependentUpon></Compile>
   </ItemGroup>
 </Project>
