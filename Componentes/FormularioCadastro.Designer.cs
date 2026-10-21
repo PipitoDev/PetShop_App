@@ -4,7 +4,7 @@ namespace PetShop_App.Componentes
     partial class FormularioCadastro
     {
         private System.ComponentModel.IContainer components;
-        private TableLayoutPanel campos;
+        protected TableLayoutPanel campos;
         private FlowLayoutPanel botoes;
         private Button btnSalvar;
         private Button btnCancelar;
@@ -22,56 +22,86 @@ namespace PetShop_App.Componentes
             botoes = new FlowLayoutPanel();
             btnSalvar = new Button();
             btnCancelar = new Button();
-            SuspendLayout();
             botoes.SuspendLayout();
-            campos.Name = "campos";
-            campos.Dock = DockStyle.Fill;
+            SuspendLayout();
+            // 
+            // campos
+            // 
+            campos.AutoScroll = true;
             campos.ColumnCount = 1;
             campos.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            campos.AutoScroll = true;
-            campos.Padding = new Padding(22);
+            campos.Dock = DockStyle.Fill;
+            campos.Location = new Point(0, 0);
+            campos.Margin = new Padding(3, 4, 3, 4);
+            campos.Name = "campos";
+            campos.Padding = new Padding(25, 29, 25, 29);
+            campos.Size = new Size(576, 648);
             campos.TabIndex = 0;
-            botoes.Name = "botoes";
-            botoes.Dock = DockStyle.Bottom;
-            botoes.Height = 65;
-            botoes.FlowDirection = FlowDirection.RightToLeft;
-            botoes.Padding = new Padding(10);
+            campos.Paint += campos_Paint;
+            // 
+            // botoes
+            // 
             botoes.Controls.Add(btnSalvar);
             botoes.Controls.Add(btnCancelar);
+            botoes.Dock = DockStyle.Bottom;
+            botoes.FlowDirection = FlowDirection.RightToLeft;
+            botoes.Location = new Point(0, 648);
+            botoes.Margin = new Padding(3, 4, 3, 4);
+            botoes.Name = "botoes";
+            botoes.Padding = new Padding(11, 13, 11, 13);
+            botoes.Size = new Size(576, 87);
             botoes.TabIndex = 1;
-            btnSalvar.Name = "btnSalvar";
-            btnSalvar.Text = "Salvar";
+            // 
+            // btnSalvar
+            // 
             btnSalvar.AutoSize = true;
-            btnSalvar.Size = new Size(100, 40);
-            btnSalvar.Padding = new Padding(14, 0, 14, 0);
             btnSalvar.BackColor = Color.FromArgb(255, 128, 0);
-            btnSalvar.ForeColor = Color.White;
+            btnSalvar.DialogResult = DialogResult.OK;
             btnSalvar.FlatStyle = FlatStyle.Flat;
             btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnSalvar.DialogResult = DialogResult.OK;
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Text = "Cancelar";
+            btnSalvar.ForeColor = Color.White;
+            btnSalvar.Location = new Point(437, 17);
+            btnSalvar.Margin = new Padding(3, 4, 3, 4);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Padding = new Padding(16, 0, 16, 0);
+            btnSalvar.Size = new Size(114, 53);
+            btnSalvar.TabIndex = 0;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = false;
+            // 
+            // btnCancelar
+            // 
             btnCancelar.AutoSize = true;
-            btnCancelar.Size = new Size(110, 40);
-            btnCancelar.Padding = new Padding(14, 0, 14, 0);
             btnCancelar.BackColor = Color.White;
-            btnCancelar.ForeColor = Color.FromArgb(255, 128, 0);
+            btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCancelar.DialogResult = DialogResult.Cancel;
+            btnCancelar.ForeColor = Color.FromArgb(255, 128, 0);
+            btnCancelar.Location = new Point(296, 17);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Padding = new Padding(16, 0, 16, 0);
+            btnCancelar.Size = new Size(135, 53);
+            btnCancelar.TabIndex = 1;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            // 
+            // FormularioCadastro
+            // 
             AcceptButton = btnSalvar;
-            CancelButton = btnCancelar;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(504, 551);
+            CancelButton = btnCancelar;
+            ClientSize = new Size(576, 735);
             Controls.Add(campos);
             Controls.Add(botoes);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
-            StartPosition = FormStartPosition.CenterParent;
             Name = "FormularioCadastro";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Cadastro";
             botoes.ResumeLayout(false);
             botoes.PerformLayout();

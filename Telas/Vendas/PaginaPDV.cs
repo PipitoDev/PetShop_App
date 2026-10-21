@@ -55,21 +55,17 @@ public partial class PaginaPDV : UserControl
 
     private async Task AbrirCaixaAsync()
     {
-        using var formulario = new FormularioCadastro("Abrir caixa", 250);
-        var campoSaldo = formulario.Numero("Saldo inicial (R$)", 999999, 2);
+        using var formulario = new FormularioCaixa(true);
         if (formulario.ShowDialog(FindForm()) != DialogResult.OK) return;
-        var saldo = campoSaldo.Value;
-        await new RepositorioPetShop().AbrirCaixaAsync(saldo);
+        await new RepositorioPetShop().AbrirCaixaAsync(formulario.Saldo);
         await AtualizarEstadoCaixaAsync();
     }
 
     private async Task FecharCaixaAsync()
     {
-        using var formulario = new FormularioCadastro("Fechar caixa", 250);
-        var campoSaldo = formulario.Numero("Saldo final contado (R$)", 999999, 2);
+        using var formulario = new FormularioCaixa(false);
         if (formulario.ShowDialog(FindForm()) != DialogResult.OK) return;
-        var saldo = campoSaldo.Value;
-        await new RepositorioPetShop().FecharCaixaAsync(saldo);
+        await new RepositorioPetShop().FecharCaixaAsync(formulario.Saldo);
         LimparVenda();
         await AtualizarEstadoCaixaAsync();
     }

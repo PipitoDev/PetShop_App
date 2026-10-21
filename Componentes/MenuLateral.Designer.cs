@@ -101,10 +101,10 @@
             // picLogoMenu
             // 
             picLogoMenu.Image = (Image)resources.GetObject("picLogoMenu.Image");
-            picLogoMenu.Location = new Point(5, 10);
+            picLogoMenu.Location = new Point(15, 10);
             picLogoMenu.Margin = new Padding(15, 10, 15, 10);
             picLogoMenu.Name = "picLogoMenu";
-            picLogoMenu.Size = new Size(285, 85);
+            picLogoMenu.Size = new Size(260, 75);
             picLogoMenu.SizeMode = PictureBoxSizeMode.Zoom;
             picLogoMenu.TabIndex = 0;
             picLogoMenu.TabStop = false;
@@ -162,7 +162,7 @@
             btnPainel.Margin = new Padding(0, 0, 0, 5);
             btnPainel.Name = "btnPainel";
             btnPainel.Padding = new Padding(15, 0, 0, 0);
-            btnPainel.Size = new Size(238, 48);
+            btnPainel.Size = new Size(260, 48);
             btnPainel.TabIndex = 0;
             btnPainel.Text = "Painel";
             btnPainel.TextAlign = ContentAlignment.MiddleLeft;
@@ -186,7 +186,7 @@
             btnClientes.Margin = new Padding(0, 0, 0, 5);
             btnClientes.Name = "btnClientes";
             btnClientes.Padding = new Padding(15, 0, 0, 0);
-            btnClientes.Size = new Size(238, 48);
+            btnClientes.Size = new Size(260, 48);
             btnClientes.TabIndex = 1;
             btnClientes.Text = "Clientes";
             btnClientes.TextAlign = ContentAlignment.MiddleLeft;
@@ -210,7 +210,7 @@
             btnPets.Margin = new Padding(0, 0, 0, 5);
             btnPets.Name = "btnPets";
             btnPets.Padding = new Padding(15, 0, 0, 0);
-            btnPets.Size = new Size(238, 48);
+            btnPets.Size = new Size(260, 48);
             btnPets.TabIndex = 2;
             btnPets.Text = "Pets";
             btnPets.TextAlign = ContentAlignment.MiddleLeft;
@@ -234,7 +234,7 @@
             btnServicos.Margin = new Padding(0, 0, 0, 5);
             btnServicos.Name = "btnServicos";
             btnServicos.Padding = new Padding(15, 0, 0, 0);
-            btnServicos.Size = new Size(238, 48);
+            btnServicos.Size = new Size(260, 48);
             btnServicos.TabIndex = 3;
             btnServicos.Text = "Serviços";
             btnServicos.TextAlign = ContentAlignment.MiddleLeft;
@@ -258,7 +258,7 @@
             btnAgendamentos.Margin = new Padding(0, 0, 0, 5);
             btnAgendamentos.Name = "btnAgendamentos";
             btnAgendamentos.Padding = new Padding(15, 0, 0, 0);
-            btnAgendamentos.Size = new Size(238, 48);
+            btnAgendamentos.Size = new Size(260, 48);
             btnAgendamentos.TabIndex = 4;
             btnAgendamentos.Text = "Agendamentos";
             btnAgendamentos.TextAlign = ContentAlignment.MiddleLeft;
@@ -282,7 +282,7 @@
             btnAtendimentos.Margin = new Padding(0, 0, 0, 5);
             btnAtendimentos.Name = "btnAtendimentos";
             btnAtendimentos.Padding = new Padding(15, 0, 0, 0);
-            btnAtendimentos.Size = new Size(238, 48);
+            btnAtendimentos.Size = new Size(260, 48);
             btnAtendimentos.TabIndex = 5;
             btnAtendimentos.Text = "Atendimentos";
             btnAtendimentos.TextAlign = ContentAlignment.MiddleLeft;
@@ -306,7 +306,7 @@
             btnPDV.Margin = new Padding(0, 0, 0, 5);
             btnPDV.Name = "btnPDV";
             btnPDV.Padding = new Padding(15, 0, 0, 0);
-            btnPDV.Size = new Size(238, 48);
+            btnPDV.Size = new Size(260, 48);
             btnPDV.TabIndex = 6;
             btnPDV.Text = "PDV";
             btnPDV.TextAlign = ContentAlignment.MiddleLeft;
@@ -330,7 +330,7 @@
             btnPedidos.Margin = new Padding(0, 0, 0, 5);
             btnPedidos.Name = "btnPedidos";
             btnPedidos.Padding = new Padding(15, 0, 0, 0);
-            btnPedidos.Size = new Size(238, 48);
+            btnPedidos.Size = new Size(260, 48);
             btnPedidos.TabIndex = 7;
             btnPedidos.Text = "Pedidos";
             btnPedidos.TextAlign = ContentAlignment.MiddleLeft;
@@ -354,7 +354,7 @@
             btnEstoque.Margin = new Padding(0, 0, 0, 5);
             btnEstoque.Name = "btnEstoque";
             btnEstoque.Padding = new Padding(15, 0, 0, 0);
-            btnEstoque.Size = new Size(238, 48);
+            btnEstoque.Size = new Size(260, 48);
             btnEstoque.TabIndex = 8;
             btnEstoque.Text = "Estoque";
             btnEstoque.TextAlign = ContentAlignment.MiddleLeft;
@@ -378,7 +378,7 @@
             btnGestao.Margin = new Padding(0, 0, 0, 5);
             btnGestao.Name = "btnGestao";
             btnGestao.Padding = new Padding(15, 0, 0, 0);
-            btnGestao.Size = new Size(238, 48);
+            btnGestao.Size = new Size(260, 48);
             btnGestao.TabIndex = 9;
             btnGestao.Text = "Gestão";
             btnGestao.TextAlign = ContentAlignment.MiddleLeft;
@@ -402,7 +402,7 @@
             btnRelatorios.Margin = new Padding(0, 0, 0, 5);
             btnRelatorios.Name = "btnRelatorios";
             btnRelatorios.Padding = new Padding(15, 0, 0, 0);
-            btnRelatorios.Size = new Size(238, 48);
+            btnRelatorios.Size = new Size(260, 48);
             btnRelatorios.TabIndex = 10;
             btnRelatorios.Text = "Relatórios";
             btnRelatorios.TextAlign = ContentAlignment.MiddleLeft;
@@ -426,7 +426,7 @@
             btnFuncionarios.Margin = new Padding(0, 0, 0, 5);
             btnFuncionarios.Name = "btnFuncionarios";
             btnFuncionarios.Padding = new Padding(15, 0, 0, 0);
-            btnFuncionarios.Size = new Size(238, 48);
+            btnFuncionarios.Size = new Size(260, 48);
             btnFuncionarios.TabIndex = 11;
             btnFuncionarios.Text = "Funcionários";
             btnFuncionarios.TextAlign = ContentAlignment.MiddleLeft;
@@ -450,7 +450,7 @@
             btnAuditoria.Margin = new Padding(0, 0, 0, 5);
             btnAuditoria.Name = "btnAuditoria";
             btnAuditoria.Padding = new Padding(15, 0, 0, 0);
-            btnAuditoria.Size = new Size(238, 48);
+            btnAuditoria.Size = new Size(260, 48);
             btnAuditoria.TabIndex = 12;
             btnAuditoria.Text = "Auditoria";
             btnAuditoria.TextAlign = ContentAlignment.MiddleLeft;

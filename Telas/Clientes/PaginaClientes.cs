@@ -76,36 +76,9 @@ public partial class PaginaClientes : UserControl
 
     private async Task SalvarAsync(Cliente? existente)
     {
-        using var formulario = new FormularioCadastro(existente is null ? "Cadastrar cliente" : "Editar cliente", 480);
-        var nome = formulario.Texto("Nome completo *");
-        var cpf = formulario.Texto("CPF");
-        var telefone = formulario.Texto("Telefone");
-        var email = formulario.Texto("E-mail");
-        nome.MaxLength = 150;
-        cpf.MaxLength = 14;
-        telefone.MaxLength = 20;
-        email.MaxLength = 150;
-        nome.Text = existente?.Nome ?? "";
-        cpf.Text = existente?.Cpf ?? "";
-        telefone.Text = existente?.Telefone ?? "";
-        email.Text = existente?.Email ?? "";
-        // Valida antes de fechar para preservar os campos preenchidos.
-        formulario.FormClosing += (_, evento) =>
-        {
-            if (formulario.DialogResult != DialogResult.OK || !string.IsNullOrWhiteSpace(nome.Text)) return;
-            evento.Cancel = true;
-            MessageBox.Show(formulario, "Informe o nome do cliente.", "Campo obrigatório");
-            nome.Focus();
-        };
+        using var formulario = new FormularioCliente(existente);
         if (formulario.ShowDialog(this) != DialogResult.OK) return;
-        var cliente = new Cliente
-        {
-            Id = existente?.Id ?? 0,
-            Nome = nome.Text.Trim(),
-            Cpf = cpf.Text.Trim(),
-            Telefone = telefone.Text.Trim(),
-            Email = email.Text.Trim()
-        };
+        var cliente = formulario.Cliente;
         if (existente is null) await repositorio.SalvarClienteAsync(cliente);
         else await repositorio.AtualizarClienteAsync(cliente);
         await CarregarAsync();
