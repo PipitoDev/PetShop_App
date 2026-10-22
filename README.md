@@ -1,6 +1,6 @@
-# PetShop Central
+# PATAHUB
 
-Sistema desktop em C# WinForms para clientes, pets, serviços e atendimentos, seguindo o protótipo do Figma.
+Sistema desktop em C# WinForms para clientes, pets, serviços e atendimentos, seguindo o protótipo desenvolvido por nossa equipe no Figma.
 
 ## MySQL
 
