@@ -37,7 +37,6 @@ namespace PetShop_App.Componentes
             campos.Padding = new Padding(25, 29, 25, 29);
             campos.Size = new Size(576, 648);
             campos.TabIndex = 0;
-            campos.Paint += campos_Paint;
             // 
             // botoes
             // 

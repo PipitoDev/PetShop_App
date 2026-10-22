@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace PetShop_App.Componentes
 {
+    /// <summary>
+    /// Painel reutilizável com borda e cantos arredondados. Pode ser configurado
+    /// diretamente pela janela de propriedades do Windows Forms Designer.
+    /// </summary>
     public class PainelArredondado : Panel
     {
         private int raio = 12;
@@ -54,6 +58,7 @@ namespace PetShop_App.Componentes
             Padding = new Padding(12, 5, 12, 5);
         }
 
+        /// <summary>Cria o caminho gráfico usado tanto no recorte quanto na borda.</summary>
         private GraphicsPath CriarCaminho(Rectangle area)
         {
             GraphicsPath caminho = new GraphicsPath();
@@ -92,6 +97,7 @@ namespace PetShop_App.Componentes
             return caminho;
         }
 
+        /// <summary>Atualiza a região clicável/visível sempre que o tamanho muda.</summary>
         private void AtualizarRegiao()
         {
             if (Width <= 0 || Height <= 0)

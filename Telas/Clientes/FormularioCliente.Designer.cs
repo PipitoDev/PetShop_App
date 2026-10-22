@@ -3,7 +3,7 @@ namespace PetShop_App.Telas.Clientes;
 
 partial class FormularioCliente
 {
-    private System.ComponentModel.IContainer components;
+    private System.ComponentModel.IContainer components = null;
     private TableLayoutPanel campos;
     private FlowLayoutPanel botoes;
     private Button btnSalvar;
@@ -86,6 +86,7 @@ partial class FormularioCliente
         txtNome.Location = new Point(25, 45);
         txtNome.MaxLength = 150;
         txtNome.Name = "txtNome";
+        txtNome.PlaceholderText = "Nome e sobrenome";
         txtNome.Size = new Size(454, 30);
         txtNome.TabIndex = 1;
         // 
@@ -106,6 +107,7 @@ partial class FormularioCliente
         txtCpf.Location = new Point(25, 106);
         txtCpf.MaxLength = 14;
         txtCpf.Name = "txtCpf";
+        txtCpf.PlaceholderText = "000.000.000-00";
         txtCpf.Size = new Size(454, 30);
         txtCpf.TabIndex = 3;
         // 
@@ -126,6 +128,7 @@ partial class FormularioCliente
         txtTelefone.Location = new Point(25, 166);
         txtTelefone.MaxLength = 20;
         txtTelefone.Name = "txtTelefone";
+        txtTelefone.PlaceholderText = "(00) 00000-0000";
         txtTelefone.Size = new Size(454, 30);
         txtTelefone.TabIndex = 5;
         // 
@@ -146,6 +149,7 @@ partial class FormularioCliente
         txtEmail.Location = new Point(25, 234);
         txtEmail.MaxLength = 150;
         txtEmail.Name = "txtEmail";
+        txtEmail.PlaceholderText = "cliente@email.com";
         txtEmail.Size = new Size(454, 30);
         txtEmail.TabIndex = 7;
         // 
@@ -168,11 +172,11 @@ partial class FormularioCliente
         btnSalvar.FlatStyle = FlatStyle.Flat;
         btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnSalvar.ForeColor = Color.White;
-        btnSalvar.Location = new Point(371, 13);
+        btnSalvar.Location = new Point(346, 13);
         btnSalvar.Name = "btnSalvar";
-        btnSalvar.Size = new Size(110, 40);
+        btnSalvar.Size = new Size(135, 40);
         btnSalvar.TabIndex = 0;
-        btnSalvar.Text = "Salvar";
+        btnSalvar.Text = "Salvar cliente";
         btnSalvar.UseVisualStyleBackColor = false;
         // 
         // btnCancelar
@@ -182,7 +186,7 @@ partial class FormularioCliente
         btnCancelar.FlatStyle = FlatStyle.Flat;
         btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnCancelar.ForeColor = Color.FromArgb(255, 128, 0);
-        btnCancelar.Location = new Point(245, 13);
+        btnCancelar.Location = new Point(220, 13);
         btnCancelar.Name = "btnCancelar";
         btnCancelar.Size = new Size(120, 40);
         btnCancelar.TabIndex = 1;

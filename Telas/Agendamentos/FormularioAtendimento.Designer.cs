@@ -35,7 +35,7 @@ partial class FormularioAtendimento
         ConfigurarLabel(lblStatus, "Status"); ConfigurarCombo(cmbStatus);
         cmbStatus.Items.AddRange(new object[] { "Agendado", "Confirmado", "Em atendimento", "Concluído", "Cancelado" });
         ConfigurarLabel(lblObservacoes, "Observações");
-        txtObservacoes.Dock = DockStyle.Top; txtObservacoes.Font = new Font("Segoe UI", 10F); txtObservacoes.Multiline = true; txtObservacoes.Height = 70;
+        txtObservacoes.Dock = DockStyle.Top; txtObservacoes.Font = new Font("Segoe UI", 10F); txtObservacoes.Multiline = true; txtObservacoes.Height = 70; txtObservacoes.PlaceholderText = "Informações importantes sobre o atendimento";
         campos.Controls.Add(lblPet); campos.Controls.Add(cmbPet);
         campos.Controls.Add(lblServico); campos.Controls.Add(cmbServico);
         campos.Controls.Add(lblDataHora); campos.Controls.Add(dtpDataHora);
@@ -49,7 +49,7 @@ partial class FormularioAtendimento
     {
         campos.AutoScroll = true; campos.ColumnCount = 1; campos.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); campos.Dock = DockStyle.Fill; campos.Padding = new Padding(22);
         botoes.Controls.Add(btnSalvar); botoes.Controls.Add(btnCancelar); botoes.Dock = DockStyle.Bottom; botoes.FlowDirection = FlowDirection.RightToLeft; botoes.Height = 65; botoes.Padding = new Padding(10);
-        btnSalvar.Text = "Salvar"; btnSalvar.Size = new Size(110, 40); btnSalvar.BackColor = Color.FromArgb(255, 128, 0); btnSalvar.ForeColor = Color.White; btnSalvar.FlatStyle = FlatStyle.Flat; btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnSalvar.DialogResult = DialogResult.OK;
+        btnSalvar.Text = "Agendar"; btnSalvar.Size = new Size(110, 40); btnSalvar.BackColor = Color.FromArgb(255, 128, 0); btnSalvar.ForeColor = Color.White; btnSalvar.FlatStyle = FlatStyle.Flat; btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnSalvar.DialogResult = DialogResult.OK;
         btnCancelar.Text = "Cancelar"; btnCancelar.Size = new Size(120, 40); btnCancelar.BackColor = Color.White; btnCancelar.ForeColor = Color.FromArgb(255, 128, 0); btnCancelar.FlatStyle = FlatStyle.Flat; btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnCancelar.DialogResult = DialogResult.Cancel;
         AcceptButton = btnSalvar; CancelButton = btnCancelar; AutoScaleMode = AutoScaleMode.Font; BackColor = Color.White; FormBorderStyle = FormBorderStyle.FixedDialog; MaximizeBox = false; MinimizeBox = false; StartPosition = FormStartPosition.CenterParent;
     }

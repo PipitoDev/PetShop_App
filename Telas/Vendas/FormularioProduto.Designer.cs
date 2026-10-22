@@ -24,7 +24,7 @@ partial class FormularioProduto
         ((System.ComponentModel.ISupportInitialize)numPreco).BeginInit(); ((System.ComponentModel.ISupportInitialize)numEstoque).BeginInit(); ((System.ComponentModel.ISupportInitialize)numEstoqueMinimo).BeginInit();
         campos.SuspendLayout(); botoes.SuspendLayout(); SuspendLayout(); ConfigurarEstrutura();
         ConfigurarLabel(lblCodigo, "Código/SKU *"); ConfigurarTexto(txtCodigo); txtCodigo.PlaceholderText = "Ex.: RAC-007";
-        ConfigurarLabel(lblNome, "Nome do produto *"); ConfigurarTexto(txtNome);
+        ConfigurarLabel(lblNome, "Nome do produto *"); ConfigurarTexto(txtNome); txtNome.PlaceholderText = "Ex.: Ração Premium 10 kg";
         ConfigurarLabel(lblCategoria, "Categoria *"); cmbCategoria.Dock = DockStyle.Top; cmbCategoria.DropDownStyle = ComboBoxStyle.DropDownList; cmbCategoria.Font = new Font("Segoe UI", 10F);
         cmbCategoria.Items.AddRange(new object[] { "Rações", "Petiscos", "Higiene", "Brinquedos", "Acessórios", "Medicamentos", "Outros" });
         ConfigurarLabel(lblPreco, "Preço de venda (R$) *"); ConfigurarNumero(numPreco, 999999, 2);
@@ -41,7 +41,7 @@ partial class FormularioProduto
     {
         campos.AutoScroll = true; campos.ColumnCount = 1; campos.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); campos.Dock = DockStyle.Fill; campos.Padding = new Padding(22);
         botoes.Controls.Add(btnSalvar); botoes.Controls.Add(btnCancelar); botoes.Dock = DockStyle.Bottom; botoes.FlowDirection = FlowDirection.RightToLeft; botoes.Height = 65; botoes.Padding = new Padding(10);
-        btnSalvar.Text = "Salvar"; btnSalvar.Size = new Size(110, 40); btnSalvar.BackColor = Color.FromArgb(255, 128, 0); btnSalvar.ForeColor = Color.White; btnSalvar.FlatStyle = FlatStyle.Flat; btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnSalvar.DialogResult = DialogResult.OK;
+        btnSalvar.Text = "Salvar produto"; btnSalvar.Size = new Size(135, 40); btnSalvar.BackColor = Color.FromArgb(255, 128, 0); btnSalvar.ForeColor = Color.White; btnSalvar.FlatStyle = FlatStyle.Flat; btnSalvar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnSalvar.DialogResult = DialogResult.OK;
         btnCancelar.Text = "Cancelar"; btnCancelar.Size = new Size(120, 40); btnCancelar.BackColor = Color.White; btnCancelar.ForeColor = Color.FromArgb(255, 128, 0); btnCancelar.FlatStyle = FlatStyle.Flat; btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold); btnCancelar.DialogResult = DialogResult.Cancel;
         AcceptButton = btnSalvar; CancelButton = btnCancelar; AutoScaleMode = AutoScaleMode.Font; BackColor = Color.White; FormBorderStyle = FormBorderStyle.FixedDialog; MaximizeBox = false; MinimizeBox = false; StartPosition = FormStartPosition.CenterParent;
     }

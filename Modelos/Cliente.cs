@@ -1,5 +1,6 @@
 namespace PetShop_App.Modelos;
 
+/// <summary>Dados pessoais e de contato do tutor responsável por pets e pedidos.</summary>
 public sealed class Cliente
 {
     public int Id { get; set; }

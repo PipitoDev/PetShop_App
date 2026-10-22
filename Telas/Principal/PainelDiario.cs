@@ -3,6 +3,10 @@ using PetShop_App.Dados;
 
 namespace PetShop_App.Telas.Principal;
 
+/// <summary>
+/// Resumo operacional exibido ao entrar no sistema. Combina atendimentos, pets
+/// e pedidos para montar indicadores e a agenda do dia.
+/// </summary>
 public partial class PainelDiario : UserControl
 {
     public PainelDiario()
@@ -20,9 +24,7 @@ public partial class PainelDiario : UserControl
         Resize += (_, _) => AjustarLayoutDosCartoes();
     }
 
-    /// <summary>
-    /// Evento executado quando o painel principal é carregado.
-    /// </summary>
+    /// <summary>Executa a primeira carga quando o controle entra na árvore visual.</summary>
     private async void PainelDiario_Load(object? sender, EventArgs e)
     {
         AjustarLayoutDosCartoes();
@@ -30,7 +32,7 @@ public partial class PainelDiario : UserControl
     }
 
     /// <summary>
-    /// Distribui os cartões conforme a largura disponível. Em telas menores,
+    /// Distribui os cartões conforme a largura disponível; em telas menores,
     /// eles passam para a linha seguinte em vez de serem cortados.
     /// </summary>
     private void AjustarLayoutDosCartoes()

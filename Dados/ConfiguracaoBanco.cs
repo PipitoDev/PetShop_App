@@ -1,5 +1,9 @@
 namespace PetShop_App.Dados;
 
+/// <summary>
+/// Centraliza os parâmetros de acesso ao MySQL. Variáveis de ambiente têm
+/// prioridade; os valores padrão permitem execução local com Laragon.
+/// </summary>
 public static class ConfiguracaoBanco
 {
     // Padrões do Laragon: MySQL local, porta 3306, usuário root e senha vazia.

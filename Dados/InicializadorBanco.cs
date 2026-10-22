@@ -2,10 +2,16 @@ using MySqlConnector;
 
 namespace PetShop_App.Dados;
 
+/// <summary>
+/// Provisiona o banco, as tabelas e os dados mínimos de demonstração.
+/// Os comandos são idempotentes e podem ser executados em toda inicialização.
+/// </summary>
 public static class InicializadorBanco
 {
+    /// <summary>Garante que o banco e sua estrutura existam antes da autenticação.</summary>
     public static async Task InicializarAsync()
     {
+        // A primeira conexão não informa Database porque ele pode ainda não existir.
         await using (var conexaoServidor = ConexaoBanco.Criar(false))
         {
             await conexaoServidor.OpenAsync();
@@ -14,9 +20,12 @@ public static class InicializadorBanco
             await criarBanco.ExecuteNonQueryAsync();
         }
 
+        // A partir daqui, todos os comandos são executados dentro do banco criado.
         await using var conexao = ConexaoBanco.Criar();
         await conexao.OpenAsync();
         await using var comando = conexao.CreateCommand();
+        // CREATE IF NOT EXISTS e INSERT IGNORE permitem repetir a inicialização
+        // sem apagar ou duplicar dados cadastrados pelo usuário.
         comando.CommandText = """
             CREATE TABLE IF NOT EXISTS funcionarios (
                 id INT AUTO_INCREMENT PRIMARY KEY,
