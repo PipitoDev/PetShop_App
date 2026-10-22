@@ -529,7 +529,6 @@
             lblCargo.Size = new Size(43, 19);
             lblCargo.TabIndex = 2;
             lblCargo.Text = "Dono";
-            lblCargo.Click += lblUnidade_Click;
             // 
             // lblNomeUsuario
             // 
@@ -542,7 +541,6 @@
             lblNomeUsuario.Size = new Size(56, 20);
             lblNomeUsuario.TabIndex = 1;
             lblNomeUsuario.Text = "Admin";
-            lblNomeUsuario.Click += lblNomeUsuario_Click;
             // 
             // pnlDadosUsuario
             // 
@@ -566,7 +564,6 @@
             lblCaixa.Size = new Size(101, 20);
             lblCaixa.TabIndex = 3;
             lblCaixa.Text = "Caixa aberto!";
-            lblCaixa.Click += label1_Click;
             // 
             // lblStatusCaixa
             // 

@@ -1,5 +1,9 @@
 namespace PetShop_App.Modelos;
 
+/// <summary>
+/// Agendamento/atendimento de um pet. Pet e Serviço são descrições de leitura;
+/// PetId e ServicoId são as chaves usadas para persistência.
+/// </summary>
 public sealed class Atendimento
 {
     public int Id { get; set; }

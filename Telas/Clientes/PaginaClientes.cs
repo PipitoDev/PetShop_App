@@ -6,25 +6,36 @@ using PetShop_App.Modelos;
 namespace PetShop_App.Telas.Clientes
 {
 
+/// <summary>
+/// Tela de consulta e manutenção de clientes. Conecta a grade, a pesquisa e os
+/// formulários de cadastro às operações correspondentes do repositório.
+/// </summary>
 public partial class PaginaClientes : UserControl
 {
+    // Uma única instância atende todas as ações enquanto esta página estiver aberta.
     private readonly RepositorioPetShop repositorio = new();
+    // Impede que uma pesquisa antiga e mais lenta substitua o resultado mais recente.
     private int versaoPesquisa;
+    // Bloqueia cliques repetidos enquanto uma operação de escrita está em andamento.
     private bool operacaoEmAndamento;
 
     public PaginaClientes()
     {
-        InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
+        InitializeComponent();
+        if (AmbienteDesign.EstaAtivo(this)) return;
+
         gradeClientes.MultiSelect = false;
         Load += async (_, _) => await CarregarAsync();
         txtPesquisa.TextChanged += async (_, _) => await CarregarAsync();
         btnNovo.Click += async (_, _) => await ExecutarAcaoAsync(() => SalvarAsync(null));
-        btnEditarRegistro.Click += async (_, _) => await ExecutarAcaoAsync(EditarAsync); btnExcluirRegistro.Click += async (_, _) => await ExecutarAcaoAsync(ExcluirAsync);
+        btnEditarRegistro.Click += async (_, _) => await ExecutarAcaoAsync(EditarAsync);
+        btnExcluirRegistro.Click += async (_, _) => await ExecutarAcaoAsync(ExcluirAsync);
     }
 
+    /// <summary>Consulta clientes e vincula o resultado diretamente à grade.</summary>
     private async Task CarregarAsync()
     {
-        if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
+        if (AmbienteDesign.EstaAtivo(this)) return;
         var versao = ++versaoPesquisa;
         try
         {
@@ -41,12 +52,16 @@ public partial class PaginaClientes : UserControl
         }
     }
 
+    /// <summary>Executa ações CRUD com bloqueio visual e tratamento central de erros.</summary>
     private async Task ExecutarAcaoAsync(Func<Task> acao)
     {
         if (operacaoEmAndamento) return;
         operacaoEmAndamento = true;
         pnlCabecalho.Enabled = false;
-        try { await acao(); }
+        try
+        {
+            await acao();
+        }
         catch (MySqlException erro) when (erro.Number == 1451)
         {
             MessageBox.Show(this, "Este cliente possui pets ou pedidos vinculados e não pode ser removido.", "Cliente vinculado");
@@ -62,18 +77,22 @@ public partial class PaginaClientes : UserControl
         }
     }
 
+    /// <summary>Retorna o modelo associado à linha atual da grade.</summary>
     private Cliente? Selecionado()
     {
         var cliente = gradeClientes.CurrentRow?.DataBoundItem as Cliente;
-        if (cliente is null) MessageBox.Show(this, "Selecione um cliente na lista.", "Clientes");
+        if (cliente is null)
+            MessageBox.Show(this, "Selecione um cliente na lista.", "Clientes");
         return cliente;
     }
 
+    /// <summary>Abre o mesmo formulário em modo de edição.</summary>
     private async Task EditarAsync()
     {
         if (Selecionado() is { } cliente) await SalvarAsync(cliente);
     }
 
+    /// <summary>Abre o formulário e decide entre INSERT e UPDATE pela existência do modelo.</summary>
     private async Task SalvarAsync(Cliente? existente)
     {
         using var formulario = new FormularioCliente(existente);
@@ -84,6 +103,7 @@ public partial class PaginaClientes : UserControl
         await CarregarAsync();
     }
 
+    /// <summary>Confirma e remove o cliente selecionado.</summary>
     private async Task ExcluirAsync()
     {
         var cliente = Selecionado();

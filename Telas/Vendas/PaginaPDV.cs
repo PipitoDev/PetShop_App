@@ -5,17 +5,30 @@ using PetShop_App.Componentes;
 namespace PetShop_App.Telas.Vendas
 {
 
+/// <summary>
+/// Coordena o ponto de venda: consulta o catálogo, mantém o carrinho da venda
+/// atual e solicita ao repositório a gravação transacional do pedido e do estoque.
+/// </summary>
 public partial class PaginaPDV : UserControl
 {
+    // Cópia do catálogo usada para filtrar a grade sem consultar o banco a cada tecla.
     private List<Produto> produtos = [];
+    // Estado temporário da venda. Ele só é persistido quando FinalizarAsync é concluído.
     private readonly List<(Produto Produto, int Quantidade)> carrinho = [];
     private bool caixaAberto;
 
+    /// <summary>
+    /// Notifica a janela principal para que o indicador global de caixa acompanhe o PDV.
+    /// </summary>
     public event Action<bool>? StatusCaixaAlterado;
 
+    /// <summary>Inicializa os controles e conecta os eventos às ações da tela.</summary>
     public PaginaPDV()
     {
-        InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
+        InitializeComponent();
+        if (AmbienteDesign.EstaAtivo(this)) return;
+
+        // A tela mantém o carrinho em memória; o repositório persiste somente na finalização.
         Load += async (_, _) => await CarregarAsync();
         txtBusca.TextChanged += (_, _) => FiltrarProdutos();
         btnAdicionar.Click += (_, _) => Adicionar();
@@ -27,9 +40,10 @@ public partial class PaginaPDV : UserControl
         btnFecharCaixa.Click += async (_, _) => await FecharCaixaAsync();
     }
 
+    /// <summary>Carrega catálogo, clientes, carrinho e situação atual do caixa.</summary>
     private async Task CarregarAsync()
     {
-        if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
+        if (AmbienteDesign.EstaAtivo(this)) return;
         var repo = new RepositorioPetShop();
         produtos = await repo.ListarProdutosAsync();
         var clientes = await repo.ListarClientesAsync();
@@ -42,6 +56,9 @@ public partial class PaginaPDV : UserControl
         await AtualizarEstadoCaixaAsync();
     }
 
+    /// <summary>
+    /// Sincroniza botões e indicador visual com o turno de caixa persistido no banco.
+    /// </summary>
     private async Task AtualizarEstadoCaixaAsync()
     {
         caixaAberto = await new RepositorioPetShop().CaixaEstaAbertoAsync();
@@ -53,6 +70,7 @@ public partial class PaginaPDV : UserControl
         StatusCaixaAlterado?.Invoke(caixaAberto);
     }
 
+    /// <summary>Solicita o saldo inicial e abre um novo turno de caixa.</summary>
     private async Task AbrirCaixaAsync()
     {
         using var formulario = new FormularioCaixa(true);
@@ -61,6 +79,7 @@ public partial class PaginaPDV : UserControl
         await AtualizarEstadoCaixaAsync();
     }
 
+    /// <summary>Solicita o saldo final, fecha o turno ativo e descarta a venda corrente.</summary>
     private async Task FecharCaixaAsync()
     {
         using var formulario = new FormularioCaixa(false);
@@ -70,6 +89,7 @@ public partial class PaginaPDV : UserControl
         await AtualizarEstadoCaixaAsync();
     }
 
+    /// <summary>Projeta no grid apenas os produtos compatíveis com nome ou código.</summary>
     private void FiltrarProdutos()
     {
         var busca = txtBusca.Text.Trim();
@@ -77,6 +97,7 @@ public partial class PaginaPDV : UserControl
             .Select(x => new { x.Codigo, x.Nome, Preço = x.Preco.ToString("C"), x.Estoque }).ToList();
     }
 
+    /// <summary>Adiciona a quantidade escolhida respeitando o estoque disponível.</summary>
     private void Adicionar()
     {
         if (gradeProdutos.CurrentRow is null) return;
@@ -96,6 +117,7 @@ public partial class PaginaPDV : UserControl
         AtualizarCarrinho();
     }
 
+    /// <summary>Remove integralmente do carrinho o produto selecionado.</summary>
     private void Remover()
     {
         if (gradeCarrinho.CurrentRow?.Cells["Codigo"].Value?.ToString() is not string codigo) return;
@@ -103,6 +125,7 @@ public partial class PaginaPDV : UserControl
         AtualizarCarrinho();
     }
 
+    /// <summary>Restaura os campos e o carrinho para o estado inicial de uma venda.</summary>
     private void LimparVenda()
     {
         carrinho.Clear();
@@ -111,6 +134,7 @@ public partial class PaginaPDV : UserControl
         AtualizarCarrinho();
     }
 
+    /// <summary>Recalcula a grade, quantidades, desconto, subtotal e total exibidos.</summary>
     private void AtualizarCarrinho()
     {
         gradeCarrinho.DataSource = carrinho.Select(x => new { x.Produto.Codigo, x.Produto.Nome, x.Quantidade, Unitário = x.Produto.Preco.ToString("C"), Subtotal = (x.Produto.Preco * x.Quantidade).ToString("C") }).ToList();
@@ -121,11 +145,26 @@ public partial class PaginaPDV : UserControl
         lblItens.Text = $"{carrinho.Sum(x => x.Quantidade)} item(ns)";
     }
 
+    /// <summary>
+    /// Valida os pré-requisitos do PDV e delega ao repositório a gravação atômica da venda.
+    /// </summary>
     private async Task FinalizarAsync()
     {
-        if (!caixaAberto) { MessageBox.Show("Abra o caixa antes de finalizar uma venda.", "Caixa fechado", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
-        if (carrinho.Count == 0) { MessageBox.Show("Adicione produtos ao carrinho."); return; }
-        if (cmbPagamento.SelectedIndex < 0) { MessageBox.Show("Selecione a forma de pagamento."); return; }
+        if (!caixaAberto)
+        {
+            MessageBox.Show("Abra o caixa antes de finalizar uma venda.", "Caixa fechado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        if (carrinho.Count == 0)
+        {
+            MessageBox.Show("Adicione produtos ao carrinho.");
+            return;
+        }
+        if (cmbPagamento.SelectedIndex < 0)
+        {
+            MessageBox.Show("Selecione a forma de pagamento.");
+            return;
+        }
         var clienteId = cmbCliente.SelectedValue is int id && id > 0 ? id : (int?)null;
         await new RepositorioPetShop().RegistrarVendaAsync(clienteId, carrinho, cmbPagamento.Text, numDesconto.Value);
         MessageBox.Show($"Venda finalizada!\n{lblTotal.Text}\nPagamento: {cmbPagamento.Text}", "PDV", MessageBoxButtons.OK, MessageBoxIcon.Information);

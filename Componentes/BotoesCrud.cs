@@ -1,20 +1,78 @@
 namespace PetShop_App.Componentes;
 
+/// <summary>Cria e posiciona os botões comuns de edição e exclusão das páginas CRUD.</summary>
 public static class BotoesCrud
 {
-    public static void Adicionar(Control painel, Func<Task> editar, Func<Task> excluir, int margemDireita = 190)
+    /// <summary>
+    /// Injeta os botões Editar e Remover em um cabeçalho e conecta os delegates
+    /// fornecidos pela página. O posicionamento acompanha o redimensionamento.
+    /// </summary>
+    public static void Adicionar(
+        Control painel,
+        Func<Task> editar,
+        Func<Task> excluir,
+        int margemDireita = 190)
     {
-        var botaoPrincipal = painel.Controls.OfType<Button>().FirstOrDefault(b => b.Name != "btnEditarRegistro" && b.Name != "btnExcluirRegistro");
-        var btnEditar = Tema.Botao("Editar", false); btnEditar.AutoSize = false; btnEditar.Name = "btnEditarRegistro"; btnEditar.Size = new Size(90, 40); btnEditar.Click += async (_, _) => await editar();
-        var btnExcluir = Tema.Botao("Remover", false); btnExcluir.AutoSize = false; btnExcluir.Name = "btnExcluirRegistro"; btnExcluir.ForeColor = Color.FromArgb(220, 38, 38); btnExcluir.Size = new Size(105, 40); btnExcluir.Click += async (_, _) => await excluir();
-        painel.Controls.Add(btnEditar); painel.Controls.Add(btnExcluir);
+        var botaoPrincipal = painel.Controls
+            .OfType<Button>()
+            .FirstOrDefault(botao =>
+                botao.Name is not "btnEditarRegistro" and not "btnExcluirRegistro");
+
+        var botaoEditar = CriarBotao("btnEditarRegistro", "Editar", new Size(90, 40));
+        var botaoExcluir = CriarBotao("btnExcluirRegistro", "Remover", new Size(105, 40));
+        botaoExcluir.ForeColor = Color.FromArgb(220, 38, 38);
+
+        botaoEditar.Click += async (_, _) => await editar();
+        botaoExcluir.Click += async (_, _) => await excluir();
+        painel.Controls.Add(botaoEditar);
+        painel.Controls.Add(botaoExcluir);
+
+        // Recalcula a posição quando o cabeçalho muda de tamanho no Designer ou em execução.
         var reposicionando = false;
-        void Posicionar() { if (reposicionando) return; reposicionando = true; var direita = botaoPrincipal?.Left ?? painel.ClientSize.Width - margemDireita; btnExcluir.Location = new Point(Math.Max(98, direita - 113), 8); btnEditar.Location = new Point(Math.Max(0, btnExcluir.Left - 98), 8); btnEditar.BringToFront(); btnExcluir.BringToFront(); botaoPrincipal?.BringToFront(); reposicionando = false; }
-        btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right; btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        void Posicionar()
+        {
+            if (reposicionando) return;
+            reposicionando = true;
+            try
+            {
+                var limiteDireito = botaoPrincipal?.Left ?? painel.ClientSize.Width - margemDireita;
+                botaoExcluir.Location = new Point(Math.Max(98, limiteDireito - 113), 8);
+                botaoEditar.Location = new Point(Math.Max(0, botaoExcluir.Left - 98), 8);
+                botaoEditar.BringToFront();
+                botaoExcluir.BringToFront();
+                botaoPrincipal?.BringToFront();
+            }
+            finally
+            {
+                reposicionando = false;
+            }
+        }
+
+        botaoEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        botaoExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         painel.Resize += (_, _) => Posicionar();
         painel.Layout += (_, _) => Posicionar();
         painel.HandleCreated += (_, _) => Posicionar();
         Posicionar();
     }
-    public static bool Confirmar(string item) => MessageBox.Show($"Deseja realmente remover {item}?", "Confirmar remoção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+
+    /// <summary>Exibe a confirmação padronizada antes de uma exclusão permanente.</summary>
+    public static bool Confirmar(string item)
+    {
+        return MessageBox.Show(
+            $"Deseja realmente remover {item}?",
+            "Confirmar remoção",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.Yes;
+    }
+
+    /// <summary>Cria um botão secundário usando a fábrica visual central.</summary>
+    private static Button CriarBotao(string nome, string texto, Size tamanho)
+    {
+        var botao = Tema.Botao(texto, principal: false);
+        botao.AutoSize = false;
+        botao.Name = nome;
+        botao.Size = tamanho;
+        return botao;
+    }
 }

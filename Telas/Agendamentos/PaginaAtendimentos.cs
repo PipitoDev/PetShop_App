@@ -1,17 +1,113 @@
 using PetShop_App.Componentes;
 using PetShop_App.Dados;
-using PetShop_App.Modelos;
-namespace PetShop_App.Telas.Agendamentos
-{
 
+namespace PetShop_App.Telas.Agendamentos;
+
+/// <summary>
+/// Página compartilhada pelos itens Agendamentos e Atendimentos do menu.
+/// O título muda, mas ambos trabalham sobre a mesma tabela e o mesmo fluxo CRUD.
+/// </summary>
 public partial class PaginaAtendimentos : UserControl
 {
-    public PaginaAtendimentos() : this("Atendimentos") { }
-    public PaginaAtendimentos(string titulo) { InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return; lblTitulo.Text = titulo; Load += async (_, _) => await CarregarAsync(); btnNovo.Click += async (_, _) => await NovoAsync(); btnEditarRegistro.Click += async (_, _) => await EditarAsync(); btnExcluirRegistro.Click += async (_, _) => await ExcluirAsync(); }
-    private async Task CarregarAsync() { if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return; try { gradeAtendimentos.DataSource = (await new RepositorioPetShop().ListarAtendimentosAsync()).Select(x => new { x.Id, Data = x.DataHora.ToString("dd/MM/yyyy HH:mm"), x.Pet, x.Tutor, x.Servico, Valor = x.Valor.ToString("C"), x.Status }).ToList(); if (gradeAtendimentos.Columns["Id"] is not null) gradeAtendimentos.Columns["Id"].Visible = false; } catch (Exception ex) { MessageBox.Show(ex.Message, "Não foi possível carregar os atendimentos"); } }
-    private async Task NovoAsync() { var repo = new RepositorioPetShop(); var pets = await repo.ListarPetsAsync(); var servicos = (await repo.ListarServicosAsync()).Where(x => x.Ativo).ToList(); if (pets.Count == 0 || servicos.Count == 0) { MessageBox.Show("Cadastre ao menos um pet e um serviço antes de agendar."); return; } using var f = new FormularioAtendimento(pets, servicos); if (f.ShowDialog(this) != DialogResult.OK) return; await repo.SalvarAtendimentoAsync(f.Atendimento); await CarregarAsync(); }
-    private async Task EditarAsync() { if (gradeAtendimentos.CurrentRow?.Cells["Id"].Value is not int id) return; var repo = new RepositorioPetShop(); var atendimento = (await repo.ListarAtendimentosAsync()).First(x => x.Id == id); var pets = await repo.ListarPetsAsync(); var servicos = await repo.ListarServicosAsync(); using var f = new FormularioAtendimento(pets, servicos, atendimento); if (f.ShowDialog(this) != DialogResult.OK) return; await repo.AtualizarAtendimentoAsync(f.Atendimento); await CarregarAsync(); }
-    private async Task ExcluirAsync() { if (gradeAtendimentos.CurrentRow?.Cells["Id"].Value is not int id || !BotoesCrud.Confirmar("o agendamento/atendimento selecionado")) return; await new RepositorioPetShop().ExcluirAtendimentoAsync(id); await CarregarAsync(); }
-}
+    private readonly RepositorioPetShop repositorio = new();
 
+    public PaginaAtendimentos() : this("Atendimentos")
+    {
+    }
+
+    public PaginaAtendimentos(string titulo)
+    {
+        InitializeComponent();
+        if (AmbienteDesign.EstaAtivo(this)) return;
+
+        lblTitulo.Text = titulo;
+        Load += async (_, _) => await CarregarAsync();
+        btnNovo.Click += async (_, _) => await AgendarAsync();
+        btnEditarRegistro.Click += async (_, _) => await EditarAsync();
+        btnExcluirRegistro.Click += async (_, _) => await ExcluirAsync();
+    }
+
+    /// <summary>Consulta e projeta atendimentos para a grade.</summary>
+    private async Task CarregarAsync()
+    {
+        try
+        {
+            var atendimentos = await repositorio.ListarAtendimentosAsync();
+            gradeAtendimentos.DataSource = atendimentos.Select(atendimento => new
+            {
+                atendimento.Id,
+                Data = atendimento.DataHora.ToString("dd/MM/yyyy HH:mm"),
+                atendimento.Pet,
+                atendimento.Tutor,
+                atendimento.Servico,
+                Valor = atendimento.Valor.ToString("C"),
+                atendimento.Status
+            }).ToList();
+
+            if (gradeAtendimentos.Columns["Id"] is { } colunaId)
+                colunaId.Visible = false;
+        }
+        catch (Exception erro)
+        {
+            MessageBox.Show(this, $"Não foi possível carregar os atendimentos.\n\n{erro.Message}", "Atendimentos");
+        }
+    }
+
+    /// <summary>Carrega dependências e cria um novo agendamento.</summary>
+    private async Task AgendarAsync()
+    {
+        // Pets e serviços são dependências obrigatórias do atendimento.
+        var pets = await repositorio.ListarPetsAsync();
+        var servicosAtivos = (await repositorio.ListarServicosAsync())
+            .Where(servico => servico.Ativo)
+            .ToList();
+
+        if (pets.Count == 0 || servicosAtivos.Count == 0)
+        {
+            MessageBox.Show(this, "Cadastre ao menos um pet e um serviço ativo antes de agendar.", "Cadastro necessário");
+            return;
+        }
+
+        using var formulario = new FormularioAtendimento(pets, servicosAtivos);
+        if (formulario.ShowDialog(this) != DialogResult.OK) return;
+
+        await repositorio.SalvarAtendimentoAsync(formulario.Atendimento);
+        await CarregarAsync();
+    }
+
+    /// <summary>Carrega o registro e as listas necessárias ao formulário de edição.</summary>
+    private async Task EditarAsync()
+    {
+        var atendimentoId = ObterIdSelecionado();
+        if (atendimentoId is null) return;
+
+        var atendimento = (await repositorio.ListarAtendimentosAsync())
+            .First(item => item.Id == atendimentoId);
+        var pets = await repositorio.ListarPetsAsync();
+        var servicos = await repositorio.ListarServicosAsync();
+
+        using var formulario = new FormularioAtendimento(pets, servicos, atendimento);
+        if (formulario.ShowDialog(this) != DialogResult.OK) return;
+
+        await repositorio.AtualizarAtendimentoAsync(formulario.Atendimento);
+        await CarregarAsync();
+    }
+
+    /// <summary>Confirma e remove o atendimento selecionado.</summary>
+    private async Task ExcluirAsync()
+    {
+        var atendimentoId = ObterIdSelecionado();
+        if (atendimentoId is null || !BotoesCrud.Confirmar("o atendimento selecionado")) return;
+
+        await repositorio.ExcluirAtendimentoAsync(atendimentoId.Value);
+        await CarregarAsync();
+    }
+
+    /// <summary>Lê o ID oculto da linha selecionada.</summary>
+    private int? ObterIdSelecionado()
+    {
+        if (gradeAtendimentos.CurrentRow?.Cells["Id"].Value is int id) return id;
+        MessageBox.Show(this, "Selecione um atendimento na lista.", "Atendimentos");
+        return null;
+    }
 }

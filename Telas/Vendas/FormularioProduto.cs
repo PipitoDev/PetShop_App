@@ -1,18 +1,23 @@
+using PetShop_App.Componentes;
 using PetShop_App.Modelos;
 
 namespace PetShop_App.Telas.Vendas;
 
+/// <summary>Janela modal de inclusão e edição de produtos do estoque.</summary>
 public partial class FormularioProduto : Form
 {
     private readonly int produtoId;
 
+    /// <summary>Inicializa categoria e estoque mínimo sugeridos para novos produtos.</summary>
     public FormularioProduto()
     {
         InitializeComponent();
+        Tema.ArredondarCamposFormulario(this);
         cmbCategoria.SelectedIndex = 0;
         numEstoqueMinimo.Value = 5;
     }
 
+    /// <summary>Preenche os controles quando o produto recebido será editado.</summary>
     public FormularioProduto(Produto? produto) : this()
     {
         produtoId = produto?.Id ?? 0;
@@ -28,6 +33,7 @@ public partial class FormularioProduto : Form
         numEstoqueMinimo.Value = Math.Clamp(produto.EstoqueMinimo, (int)numEstoqueMinimo.Minimum, (int)numEstoqueMinimo.Maximum);
     }
 
+    /// <summary>Normaliza o código e cria o modelo enviado ao repositório.</summary>
     public Produto Produto => new()
     {
         Id = produtoId,
@@ -39,6 +45,7 @@ public partial class FormularioProduto : Form
         EstoqueMinimo = (int)numEstoqueMinimo.Value
     };
 
+    /// <summary>Valida os dados comerciais mínimos antes de salvar.</summary>
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
         if (DialogResult == DialogResult.OK &&

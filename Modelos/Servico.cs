@@ -1,5 +1,6 @@
 namespace PetShop_App.Modelos;
 
+/// <summary>Serviço oferecido, com preço, duração prevista e disponibilidade.</summary>
 public sealed class Servico
 {
     public int Id { get; set; }

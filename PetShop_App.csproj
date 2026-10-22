@@ -29,7 +29,6 @@
     <Folder Include="Paginas\" />
     <Folder Include="Recursos\" />
     <Folder Include="Telas\Agendamentos\" />
-    <Folder Include="Telas\Servicos\" />
     <Folder Include="Telas\Vendas\" />
   </ItemGroup>
 

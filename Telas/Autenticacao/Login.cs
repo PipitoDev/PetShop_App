@@ -1,260 +1,112 @@
-using System.Drawing.Drawing2D;
+using PetShop_App.Componentes;
 using PetShop_App.Dados;
 using PetShop_App.Telas.Principal;
 
+namespace PetShop_App;
 
-
-namespace PetShop_App
+/// <summary>
+/// Primeira janela da aplicação. Valida os campos, prepara o banco, autentica
+/// o funcionário e transfere nome/perfil para a janela Principal.
+/// </summary>
+public partial class Login : Form
 {
-    public partial class Login : Form
+    public Login()
     {
-        public Login()
+        InitializeComponent();
+
+        WindowState = FormWindowState.Maximized;
+
+        if (AmbienteDesign.EstaAtivo(this)) return;
+
+        btnEntrar.Click += btnEntrar_Click;
+        Shown += (_, _) => AjustarResponsividade();
+        pnlLaranja.Resize += (_, _) => AjustarResponsividade();
+        pnlCardLogin.Resize += (_, _) => Tema.Arredondar(pnlCardLogin, 18);
+        Tema.Arredondar(pnlCardLogin, 18);
+    }
+
+    /// <summary>Adapta a frase lateral ao espaço disponível sem perder legibilidade.</summary>
+    private void AjustarResponsividade()
+    {
+        var largura = pnlLaranja.ClientSize.Width;
+        var altura = pnlLaranja.ClientSize.Height;
+        if (largura <= 0 || altura <= 0) return;
+
+        // Mantém a frase proporcional ao painel sem ultrapassar limites legíveis.
+        var escala = Math.Min(largura / 400f, altura / 600f);
+        var tamanhoFonte = Math.Clamp(12f * escala, 10f, 22f);
+        lblFraseEfeito.Font = new Font("Segoe UI", tamanhoFonte, FontStyle.Bold);
+    }
+
+    /// <summary>Fluxo acionado pelo botão Entrar definido no Designer.</summary>
+    private async void btnEntrar_Click(object? sender, EventArgs e)
+    {
+        var usuario = txtUsuario.Text.Trim();
+        var senha = txtSenha.Text;
+
+        if (!ValidarCredenciaisInformadas(usuario, senha)) return;
+
+        DefinirEstadoDeCarregamento(true);
+        try
         {
-            InitializeComponent(); if (PetShop_App.Componentes.AmbienteDesign.EstaAtivo(this)) return;
-
-            // Conecta o botão ao evento de validação do formulário.
-            btnEntrar.Click += btnEntrar_Click;
-
-            this.Shown += (s, e) =>
-                AjustarResponsividade();
-
-            pnlLaranja.Resize += (s, e) =>
-                AjustarResponsividade();
-
-            pnlCardLogin.Resize += (s, e) =>
+            // Garante a estrutura do banco antes de consultar o funcionário.
+            await InicializadorBanco.InicializarAsync();
+            var autenticacao = await new RepositorioPetShop().AutenticarAsync(usuario, senha);
+            if (!autenticacao.Valido)
             {
-                ArredondarPainel(pnlCardLogin, 18);
-            };
+                ExibirAviso("Credenciais inválidas", "Confira o usuário e a senha informados.");
+                return;
+            }
 
-            ArredondarPainel(pnlCardLogin, 18);
-
-
+            Hide();
+            using var principal = new Principal(autenticacao.Nome, autenticacao.Perfil);
+            principal.ShowDialog();
+            Close();
         }
-
-
-        private void ArredondarPainel(Panel painel, int raio)
+        catch (Exception erro)
         {
-            if (painel.Width <= 0 || painel.Height <= 0)
-                return;
-
-            using GraphicsPath caminho = new GraphicsPath();
-
-            int diametro = raio * 2;
-            Rectangle area = new Rectangle(
-                0, 0, painel.Width, painel.Height
-            );
-
-            caminho.AddArc(area.Left, area.Top,
-                diametro, diametro, 180, 90);
-
-            caminho.AddArc(area.Right - diametro, area.Top,
-                diametro, diametro, 270, 90);
-
-            caminho.AddArc(area.Right - diametro,
-                area.Bottom - diametro,
-                diametro, diametro, 0, 90);
-
-            caminho.AddArc(area.Left,
-                area.Bottom - diametro,
-                diametro, diametro, 90, 90);
-
-            caminho.CloseFigure();
-
-            var regiaoAnterior = painel.Region;
-            painel.Region = new Region(caminho);
-            regiaoAnterior?.Dispose();
+            ExibirAviso(
+                "Não foi possível conectar ao MySQL",
+                "Confira as variáveis PETSHOP_DB_SERVIDOR, PETSHOP_DB_PORTA, " +
+                "PETSHOP_DB_NOME, PETSHOP_DB_USUARIO e PETSHOP_DB_SENHA.\n\n" + erro.Message);
         }
-
-
-
-        private void AjustarResponsividade()
+        finally
         {
-            int largura = pnlLaranja.ClientSize.Width;
-            int altura = pnlLaranja.ClientSize.Height;
-
-            if (largura <= 0 || altura <= 0)
-                return;
-
-            // Escala relativa à largura inicial de referência.
-            float escala = Math.Min(
-                largura / 400f,
-                altura / 600f
-            );
-
-            float tamanhoFrase = Math.Clamp(
-                12f * escala,
-                10f,
-                22f
-            );
-
-            lblFraseEfeito.Font = new Font(
-                "Segoe UI",
-                tamanhoFrase,
-                FontStyle.Bold
-            );
+            if (!IsDisposed) DefinirEstadoDeCarregamento(false);
         }
+    }
 
-
-
-        private async void btnEntrar_Click(object? sender, EventArgs e)
+    /// <summary>Valida somente presença; a validade da credencial pertence ao banco.</summary>
+    private bool ValidarCredenciaisInformadas(string usuario, string senha)
+    {
+        if (string.IsNullOrWhiteSpace(usuario))
         {
-            string usuario = txtUsuario.Text.Trim();
-            string senha = txtSenha.Text;
-
-            if (string.IsNullOrWhiteSpace(usuario) && string.IsNullOrWhiteSpace(senha))
-            {
-                using var aviso = new DialogoAviso(
-                    "Preencha os campos",
-                    "Informe seu usuário ou e-mail e sua senha para continuar.");
-                aviso.ShowDialog(this);
-                txtUsuario.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(usuario))
-            {
-                using var aviso = new DialogoAviso(
-                    "Nome não informado",
-                    "Digite seu usuário ou e-mail antes de continuar.");
-                aviso.ShowDialog(this);
-                txtUsuario.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(senha))
-            {
-                using var aviso = new DialogoAviso(
-                    "Senha não informada",
-                    "Digite sua senha antes de continuar.");
-                aviso.ShowDialog(this);
-                txtSenha.Focus();
-                return;
-            }
-
-            btnEntrar.Enabled = false;
-            btnEntrar.Text = "Entrando...";
-            try
-            {
-                await InicializadorBanco.InicializarAsync();
-                var (valido, nome, perfil) = await new RepositorioPetShop().AutenticarAsync(usuario, senha);
-                if (!valido)
-                {
-                    using var avisoLogin = new DialogoAviso("Credenciais inválidas", "Confira o usuário e a senha informados.");
-                    avisoLogin.ShowDialog(this);
-                    return;
-                }
-
-                Hide();
-                using var principal = new Principal(nome, perfil);
-                principal.ShowDialog();
-                Close();
-            }
-            catch (Exception erro)
-            {
-                using var avisoBanco = new DialogoAviso("Não foi possível conectar ao MySQL", "Confira as variáveis PETSHOP_DB_SERVIDOR, PETSHOP_DB_PORTA, PETSHOP_DB_NOME, PETSHOP_DB_USUARIO e PETSHOP_DB_SENHA.\n\n" + erro.Message);
-                avisoBanco.ShowDialog(this);
-            }
-            finally
-            {
-                btnEntrar.Enabled = true;
-                btnEntrar.Text = "ENTRAR";
-            }
-        }
-
-        private void LimparCampos()
-        {
-            txtUsuario.Clear();
-            txtSenha.Clear();
+            ExibirAviso("Usuário não informado", "Digite seu usuário ou e-mail antes de continuar.");
             txtUsuario.Focus();
+            return false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        if (string.IsNullOrWhiteSpace(senha))
         {
+            ExibirAviso("Senha não informada", "Digite sua senha antes de continuar.");
+            txtSenha.Focus();
+            return false;
         }
 
-        private void lblTextoSuperiorEsquerdo_Click(object sender, EventArgs e)
-        {
+        return true;
+    }
 
-        }
+    /// <summary>Evita cliques duplicados e informa visualmente a autenticação em curso.</summary>
+    private void DefinirEstadoDeCarregamento(bool carregando)
+    {
+        btnEntrar.Enabled = !carregando;
+        btnEntrar.Text = carregando ? "Entrando..." : "ENTRAR";
+    }
 
-        private void lblTextoMedioEsquerdo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tlpCaixaDireita_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNome_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEmail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tblCaixaEmailSenha_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click_4(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEmail_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEmail_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlUsuario_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblSenha_Click(object sender, EventArgs e)
-        {
-
-        }
+    /// <summary>Abre a janela de aviso padronizada como filha do login.</summary>
+    private void ExibirAviso(string titulo, string mensagem)
+    {
+        using var aviso = new DialogoAviso(titulo, mensagem);
+        aviso.ShowDialog(this);
     }
 }

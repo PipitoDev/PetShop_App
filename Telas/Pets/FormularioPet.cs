@@ -1,18 +1,26 @@
+using PetShop_App.Componentes;
 using PetShop_App.Modelos;
 
 namespace PetShop_App.Telas.Pets;
 
+/// <summary>
+/// Janela modal de pet. Recebe os clientes para preencher o seletor de tutor e
+/// devolve um modelo Pet pronto para inclusão ou atualização.
+/// </summary>
 public partial class FormularioPet : Form
 {
     private readonly int petId;
 
+    /// <summary>Construtor usado pelo Designer e pelos demais construtores.</summary>
     public FormularioPet()
     {
         InitializeComponent();
+        Tema.ArredondarCamposFormulario(this);
         cmbEspecie.SelectedIndex = 0;
         cmbPorte.SelectedIndex = 0;
     }
 
+    /// <summary>Carrega tutores e, em edição, preenche os campos do pet existente.</summary>
     public FormularioPet(IReadOnlyList<Cliente> clientes, Pet? pet = null) : this()
     {
         petId = pet?.Id ?? 0;
@@ -32,6 +40,7 @@ public partial class FormularioPet : Form
         }
     }
 
+    /// <summary>Projeta os controles visuais no modelo utilizado pelo repositório.</summary>
     public Pet Pet => new()
     {
         Id = petId,
@@ -44,6 +53,7 @@ public partial class FormularioPet : Form
         Peso = numPeso.Value
     };
 
+    /// <summary>Valida tutor e nome antes de aceitar o DialogResult.OK.</summary>
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
         if (DialogResult == DialogResult.OK &&
@@ -54,4 +64,5 @@ public partial class FormularioPet : Form
         }
         base.OnFormClosing(e);
     }
+
 }

@@ -307,7 +307,6 @@ namespace PetShop_App
             lblSenha.TabIndex = 5;
             lblSenha.Text = "Senha:";
             lblSenha.TextAlign = ContentAlignment.BottomLeft;
-            lblSenha.Click += lblSenha_Click;
             // 
             // pnlSenha
             // 
@@ -373,7 +372,6 @@ namespace PetShop_App
             MinimumSize = new Size(898, 593);
             Name = "Login";
             Text = "PetShop";
-            Load += Form1_Load;
             plLadoDireito.ResumeLayout(false);
             tlpPrincipal.ResumeLayout(false);
             pnlLaranja.ResumeLayout(false);
