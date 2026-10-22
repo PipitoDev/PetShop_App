@@ -1,4 +1,4 @@
-﻿namespace PetShop_App
+namespace PetShop_App
 {
     partial class Login
     {

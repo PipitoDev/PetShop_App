@@ -3,7 +3,6 @@ namespace PetShop_App
     partial class DialogoAviso
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.Label lblIcone;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblMensagem;
         private System.Windows.Forms.Button btnOk;
@@ -17,22 +16,10 @@ namespace PetShop_App
 
         private void InitializeComponent()
         {
-            lblIcone = new Label();
             lblTitulo = new Label();
             lblMensagem = new Label();
             btnOk = new Button();
             SuspendLayout();
-            // 
-            // lblIcone
-            // 
-            lblIcone.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
-            lblIcone.ForeColor = Color.FromArgb(255, 128, 0);
-            lblIcone.Location = new Point(20, 18);
-            lblIcone.Name = "lblIcone";
-            lblIcone.Size = new Size(55, 55);
-            lblIcone.TabIndex = 0;
-            lblIcone.Text = "⚠";
-            lblIcone.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTitulo
             // 
@@ -74,14 +61,13 @@ namespace PetShop_App
             // DialogoAviso
             // 
             AcceptButton = btnOk;
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(408, 205);
             Controls.Add(btnOk);
             Controls.Add(lblMensagem);
             Controls.Add(lblTitulo);
-            Controls.Add(lblIcone);
             Font = new Font("Segoe UI", 10F);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
